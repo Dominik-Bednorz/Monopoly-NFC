@@ -1,7 +1,7 @@
 document.getElementById("main").style.display = "none";
 
 const ndef = new NDEFReader();
-
+let tagContent = "";
 document.getElementById("playbuttton").addEventListener("click", async () => {
     document.getElementById("startgamescreen").style.display = "none";
     document.getElementById("main").style.display = "";
@@ -10,7 +10,7 @@ document.getElementById("playbuttton").addEventListener("click", async () => {
         await ndef.scan();
 
         ndef.addEventListener("reading", (event) => {
-            let tagContent = "";
+            
 
             for (const record of event.message.records) {
                 const textDecoder = new TextDecoder(record.encoding || "utf-8");
