@@ -26,3 +26,11 @@ document.getElementById("playbuttton").addEventListener("click", async () => {
         console.error("NFC Error:", err);
     }
 });
+
+
+tagContent.addEventListener("change", () => {
+    const player5_test = document.createElement("p");
+    document.getElementById("main").appendChild(player5_test);
+    player5_test.textContent = tagContent;
+    
+})
