@@ -1,29 +1,21 @@
-document.getElementById("main").style.display = "none";
-
 const ndef = new NDEFReader();
+let nfcId = null;
 
-document.getElementById("playbuttton").addEventListener("click", async () => {
-    document.getElementById("startgamescreen").style.display = "none";
-    document.getElementById("main").style.display = "";
+document.getElementById("playbutton").addEventListener("click", async () => {
+  try {
+    await ndef.scan();
 
-    try {
-        await ndef.scan();
+    ndef.addEventListener("reading", event => {
+      for (const record of event.message.records) {
 
-        ndef.addEventListener("reading", (event) => {
-            let tagContent = "";
+        if (record.recordType === "text") {
+          nfcId = Number(new TextDecoder().decode(record.data));
+        }
 
-            for (const record of event.message.records) {
-                const textDecoder = new TextDecoder(record.encoding || "utf-8");
-                tagContent += textDecoder.decode(record.data);
-            }
+      }
+    });
 
-            console.log("NFC Inhalt:", tagContent);
-
-            // 👉 HIER deine Variable
-            window.nfcData = tagContent;
-        });
-
-    } catch (err) {
-        console.error("NFC Error:", err);
-    }
+  } catch (err) {
+    console.error(err);
+  }
 });
