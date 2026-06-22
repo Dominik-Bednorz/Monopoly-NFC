@@ -1,21 +1,39 @@
+const button = document.getElementById("playbutton");
+let nfcID = "";
 const ndef = new NDEFReader();
-let nfcId = null;
 
-document.getElementById("playbutton").addEventListener("click", async () => {
-  try {
-    await ndef.scan();
+button.addEventListener("click", async () => {
+    try {
+        await ndef.scan();
+        debug("NFC-Scan gestartet. Bitte Tag an das Gerät halten...");
 
-    ndef.addEventListener("reading", event => {
-      for (const record of event.message.records) {
+        ndef.addEventListener("reading", (event) => {
+            let tagContent = "";
 
-        if (record.recordType === "text") {
-          nfcId = Number(new TextDecoder().decode(record.data));
-        }
+            for (const record of event.message.records) {
+                const textDecoder = new TextDecoder(record.encoding || "utf-8");
+                tagContent += textDecoder.decode(record.data);
+            }
 
-      }
-    });
+            tagContent = tagContent.trim();
+            debug(`NFC Inhalt gelesen: ${tagContent}`);
 
-  } catch (err) {
-    console.error(err);
-  }
+            const parsedNumber = Number(tagContent);
+            if (!Number.isNaN(parsedNumber) && tagContent !== "") {
+                nfcID = parsedNumber;
+                debug(`nfcID gesetzt: ${nfcID}`);
+            } else {
+                nfcID = tagContent;
+                debug(`nfcID gesetzt (nicht numerisch): ${nfcID}`);
+            }
+
+            window.nfcID = nfcID;
+        });
+    } catch (err) {
+        debug(`NFC Error: ${err}`);
+    }
 });
+
+function debug(msg) {
+    document.getElementById("debug").innerText += msg + "\n";
+}
