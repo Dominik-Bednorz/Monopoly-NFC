@@ -1,0 +1,43 @@
+{
+  "spieler": {
+    "Hund": {
+      "name": "Hund",
+      "geld": 1500
+    },
+    "Safe": {
+      "name": "Safe",
+      "geld": 1500
+    },
+    "Flugzeug": {
+      "name": "Flugzeug",
+      "geld": 1500
+    },
+    "Auto": {
+      "name": "Auto",
+      "geld": 1500
+    }
+  },
+
+  "felder": {
+    "1": {
+      "name": "Start",
+      "type": "start"
+    },
+    "30": {
+      "name": "Ereignisfeld",
+      "type": "event"
+    },
+    "12": {
+      "name": "Bahnhof",
+      "type": "property",
+      "price": 200
+    }
+  },
+
+  "events": {
+    "30": {
+      "text": "🚗 Auto kaputt!",
+      "effect": -10
+    }
+  }
+}
