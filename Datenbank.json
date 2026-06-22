@@ -1,20 +1,20 @@
 {
   "spieler": {
     "Hund": {
-      "name": "Hund",
-      "geld": 1500
+      "id": 1,
+      "name": "Hund"
     },
     "Safe": {
-      "name": "Safe",
-      "geld": 1500
+      "id": 2,
+      "name": "Safe"
     },
     "Flugzeug": {
-      "name": "Flugzeug",
-      "geld": 1500
+      "id": 3,
+      "name": "Flugzeug"
     },
     "Auto": {
-      "name": "Auto",
-      "geld": 1500
+      "id": 4,
+      "name": "Auto"
     }
   },
 
