@@ -26,16 +26,3 @@ document.getElementById("playbuttton").addEventListener("click", async () => {
         console.error("NFC Error:", err);
     }
 });
-
-function loudPlayer {
-    return Object.values(daten.spieler).find(spieler => spieler.id === id);
-};
-
-
-// das Spiel wartet auf Spieler und speichert NFC ids//
-tagContent.addEventListener("change", () => {
-    if (tagContent >= 1 && tagContent <= 4) {
-        loudPlayer(tagContent);
-    }
-
-});
