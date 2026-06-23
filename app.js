@@ -35,9 +35,7 @@ startgame.addEventListener("click", async () => {
 
 
 function invite_Players (id) { //Funktion für das arbeiten mit NFC
-    if (id >= 0 && id <= 4) {
-        return data[id].name
-    }
+    return data[id]?.name
 };
 
 function debug(msg) { //statt Console
