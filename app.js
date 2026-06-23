@@ -2,8 +2,6 @@ let data;
 async function init() {
     const response = await fetch("Datenbank.json");
     data = await response.json();
-
-    debug(data);
 }
 
 init();
@@ -30,6 +28,7 @@ startgame.addEventListener("click", async () => {
         debug(nfcID);
         if (gameMode === "waiting_for_players") {
             debug(invite_Players(nfcID));
+
         }
     };
 });
@@ -37,6 +36,7 @@ startgame.addEventListener("click", async () => {
 
 function invite_Players (id) { //Funktion für das arbeiten mit NFC
     return data[id]?.name
+    document.getElementById(id).classList.remove("blinken");
 };
 
 function debug(msg) { //statt Console
