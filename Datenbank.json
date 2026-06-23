@@ -1,42 +1,22 @@
 {
-  
-    "Hund": {
-      "id": 1,
-      "name": "Hund"
-    },
-    "Safe": {
-      "id": 2,
-      "name": "Safe"
-    },
-    "Flugzeug": {
-      "id": 3,
-      "name": "Flugzeug"
-    },
-    "Auto": {
-      "id": 4,
-      "name": "Auto"
-  },
-
-  "felder": {
     "1": {
-      "name": "Start",
-      "type": "start"
+        "typ": "Spieler",
+        "name": "Hund",
+        "spezial": ""
     },
-    "30": {
-      "name": "Ereignisfeld",
-      "type": "event"
+    "2": {
+        "typ": "Spieler",
+        "name": "Safe",
+        "spezial": ""
     },
-    "12": {
-      "name": "Bahnhof",
-      "type": "property",
-      "price": 200
+    "3": {
+        "typ": "Spieler",
+        "name": "Flugzeug",
+        "spezial": ""
+    },
+    "4": {
+        "typ": "Spieler",
+        "name": "Auto",
+        "spezial": ""
     }
-  },
-
-  "events": {
-    "30": {
-      "text": "🚗 Auto kaputt!",
-      "effect": -10
-    }
-  }
 }

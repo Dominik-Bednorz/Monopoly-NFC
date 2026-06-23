@@ -10,10 +10,15 @@ button.addEventListener("click", async () => {
         const record = message.records[0];
         nfcID = Number(new TextDecoder().decode(record.data));
 
-        debug(nfcID);
+        debug("gescant:" + nfcID);
     };
 });
 
+
+function handle_nfc () {
+    debug("test");
+};
+
 function debug(msg) {
     document.getElementById("debug").innerText += msg + "\n";
-}
+};
