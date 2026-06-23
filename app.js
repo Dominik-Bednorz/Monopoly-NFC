@@ -35,8 +35,8 @@ startgame.addEventListener("click", async () => {
 
 
 function invite_Players (id) { //Funktion für das arbeiten mit NFC
-    return data[id]?.name
     document.getElementById(id).classList.remove("blinken");
+    return data[id]?.name
 };
 
 function debug(msg) { //statt Console
