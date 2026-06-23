@@ -1,5 +1,5 @@
 {
-  "spieler": {
+  
     "Hund": {
       "id": 1,
       "name": "Hund"
@@ -15,7 +15,6 @@
     "Auto": {
       "id": 4,
       "name": "Auto"
-    }
   },
 
   "felder": {
