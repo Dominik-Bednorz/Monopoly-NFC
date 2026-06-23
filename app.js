@@ -1,5 +1,5 @@
 const response = await fetch("Datenbank.json");
-const daten = await response.json(); //JSON wird initalisiert
+const data = await response.json(); //JSON wird initalisiert
 
 const startgame = document.getElementById("playbutton"); //festlegung des Spielstart buttons
 
