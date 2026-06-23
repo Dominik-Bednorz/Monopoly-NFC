@@ -1,6 +1,7 @@
+let = data;
 async function init() {
-    const response = await fetch("Datenbank.json");
-    const data = await response.json();
+    response = await fetch("Datenbank.json");
+    data = await response.json();
 
     debug(data);
 }
