@@ -1,5 +1,11 @@
-const response = await fetch("Datenbank.json");
-const data = await response.json(); //JSON wird initalisiert
+async function init() {
+    const response = await fetch("Datenbank.json");
+    const data = await response.json();
+
+    debug(data);
+}
+
+init();
 
 const startgame = document.getElementById("playbutton"); //festlegung des Spielstart buttons
 
@@ -36,3 +42,5 @@ function invite_Players (id) { //Funktion für das arbeiten mit NFC
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";
 };
+
+console.log()
