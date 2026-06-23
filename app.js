@@ -21,15 +21,15 @@ startgame.addEventListener("click", async () => {
         nfcID = Number(new TextDecoder().decode(record.data));
 
         if (gameMode === "waiting_for_players") {
-            invite_Players(nfcID);
+            debug(invite_Players(nfcID)):
         }
     };
 });
 
 
-function invite_Players (i) { //Funktion für das arbeiten mit NFC
-    if (i >= 0 && i <= 4) {
-        return data[i].name
+function invite_Players (id) { //Funktion für das arbeiten mit NFC
+    if (id >= 0 && id <= 4) {
+        return data[id].name
     }
 };
 
