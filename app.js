@@ -33,23 +33,20 @@ startgame.addEventListener("click", async () => {
     };
 });
 
-let spielerAnzahl = 0;
-const beigetreteneSpieler = new Set();
+const spielerAnzahl = new Set();
 const lobbyFertig = document.createElement("button");
 
 function invite_Players(id) {
 
-    if (beigetreteneSpieler.has(id)) {
+    if (spielerAnzahl.has(id)) {
         return data[id]?.name + " ist bereits beigetreten";
     }
 
-    beigetreteneSpieler.add(id);
+    spielerAnzahl.add(id);
 
     document.getElementById(id)?.classList.remove("blinken");
 
-    spielerAnzahl++;
-
-    if (spielerAnzahl === 2) {
+    if (spielerAnzahl.size === 2) {
         lobbyFertig.textContent = "Alle Spieler da, starten";
         document.getElementById("main").appendChild(lobbyFertig);
     }
@@ -60,8 +57,9 @@ function invite_Players(id) {
 lobbyFertig.addEventListener("click", () => {
     lobbyFertig.classList.add("invisible");
     document.getElementById("lobby").classList.add("invisible");
+    gameMode = "waiting_for_next_action";
 
-    
+
 });
 
 function debug(msg) { //statt Console
