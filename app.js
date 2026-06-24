@@ -35,7 +35,7 @@ startgame.addEventListener("click", async () => {
 
 let spielerAnzahl = 0;
 const beigetreteneSpieler = new Set();
-const lobbyFertig;
+const lobbyFertig = document.createElement("button");;
 
 function invite_Players(id) {
 
@@ -50,7 +50,6 @@ function invite_Players(id) {
     spielerAnzahl++;
 
     if (spielerAnzahl === 2) {
-        lobbyFertig = document.createElement("button");
         lobbyFertig.textContent = "Alle Spieler da, starten";
         document.getElementById("main").appendChild(lobbyFertig);
     }
