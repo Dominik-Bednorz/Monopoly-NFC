@@ -33,11 +33,22 @@ startgame.addEventListener("click", async () => {
     };
 });
 
+let spielerAnzahl = 0;
 
 function invite_Players (id) { //Funktion für das arbeiten mit NFC
     document.getElementById(id).classList.remove("blinken");
+    spielerAnzahl = spielerAnzahl + 1;
     return data[id]?.name
 };
+
+spielerAnzahl.addEventListener("change", () => {
+    if(spielerAnzahl >= 4) {
+        const LobbyFertig = document.createElement("button");
+        document.getElementById(LobbyFertig);
+        LobbyFertig.innerHTML("Alle Spieler da, starten");
+        
+    }
+});
 
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";
