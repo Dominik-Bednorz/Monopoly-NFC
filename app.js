@@ -35,7 +35,7 @@ startgame.addEventListener("click", async () => {
 
 let spielerAnzahl = 0;
 const beigetreteneSpieler = new Set();
-const lobbyFertig = document.createElement("button");;
+const lobbyFertig = document.createElement("button");
 
 function invite_Players(id) {
 
@@ -59,6 +59,9 @@ function invite_Players(id) {
 
 lobbyFertig.addEventListener("click", () => {
     lobbyFertig.classList.add("invisible");
+    document.getElementById("lobby").classList.add("invisible");
+
+    
 });
 
 function debug(msg) { //statt Console
