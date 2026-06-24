@@ -35,20 +35,26 @@ startgame.addEventListener("click", async () => {
 
 let spielerAnzahl = 0;
 
-function invite_Players (id) { //Funktion für das arbeiten mit NFC
-    document.getElementById(id).classList.remove("blinken");
-    spielerAnzahl = spielerAnzahl + 1;
-    return data[id]?.name
-};
+function invite_Players(id) {
 
-spielerAnzahl.addEventListener("change", () => {
-    if(spielerAnzahl >= 4) {
-        const LobbyFertig = document.createElement("button");
-        document.getElementById(LobbyFertig);
-        LobbyFertig.innerHTML("Alle Spieler da, starten");
-        
+    if (beigetreteneSpieler.has(id)) {
+        return data[id]?.name + " ist bereits beigetreten";
     }
-});
+
+    beigetreteneSpieler.add(id);
+
+    document.getElementById(id)?.classList.remove("blinken");
+
+    spielerAnzahl++;
+
+    if (spielerAnzahl === 2) {
+        const lobbyFertig = document.createElement("button");
+        lobbyFertig.textContent = "Alle Spieler da, starten";
+        document.getElementById("main").appendChild(lobbyFertig);
+    }
+
+    return data[id]?.name + " ist beigetreten";
+}
 
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";
