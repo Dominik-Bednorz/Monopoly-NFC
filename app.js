@@ -34,6 +34,7 @@ startgame.addEventListener("click", async () => {
 });
 
 let spielerAnzahl = 0;
+const beigetreteneSpieler = new Set();
 
 function invite_Players(id) {
 
