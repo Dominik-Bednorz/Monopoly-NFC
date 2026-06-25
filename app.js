@@ -33,20 +33,20 @@ startgame.addEventListener("click", async () => {
     };
 });
 
-const spielerAnzahl = new Set();
+const beigetreteneSpieler = new Set();
 const lobbyFertig = document.createElement("button");
 
 function invite_Players(id) {
 
-    if (spielerAnzahl.has(id)) {
+    if (beigetreteneSpieler.has(id)) {
         return data[id]?.name + " ist bereits beigetreten";
     }
 
-    spielerAnzahl.add(id);
+    beigetreteneSpieler.add(id);
 
     document.getElementById(id)?.classList.remove("blinken");
 
-    if (spielerAnzahl.size === 2) {
+    if (beigetreteneSpieler.size === 2) {
         lobbyFertig.textContent = "Alle Spieler da, starten";
         document.getElementById("main").appendChild(lobbyFertig);
     }
@@ -54,12 +54,23 @@ function invite_Players(id) {
     return data[id]?.name + " ist beigetreten";
 }
 
+const gameState = new Map();
+const bankdiv = document.createElement("div");
+
 lobbyFertig.addEventListener("click", () => {
     lobbyFertig.classList.add("invisible");
     document.getElementById("lobby").classList.add("invisible");
     gameMode = "waiting_for_next_action";
 
+    for(const id of beigetreteneSpieler) {
+        gameState.set(id, {
+            name: data[id].name,
+            geld: 1500,
+            grundstücke: []
+        })
+    };
 
+    innerText = "${"
 });
 
 function debug(msg) { //statt Console
