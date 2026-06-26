@@ -30,6 +30,9 @@ startgame.addEventListener("click", async () => {
             debug(invite_Players(nfcID));
 
         }
+        if (gameMode === "waiting_for_next_action") {
+            
+        }
     };
 });
 
