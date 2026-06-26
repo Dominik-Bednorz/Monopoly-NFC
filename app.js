@@ -70,13 +70,13 @@ lobbyFertig.addEventListener("click", () => {
             grundstücke: []
         })
 
-        text += `${gameState.get(id).name}: ${gameState.get(id).geld}$\n`;
+        bankdiv_text += `${gameState.get(id).name}: ${gameState.get(id).geld}$\n`;
     };
 
    
 
     bankdiv.innerText = bankdiv_text;
-    document.getElementById(bankdiv).appendChild(bankdiv);
+    document.getElementById("main").appendChild(bankdiv);
 });
 
 function debug(msg) { //statt Console
