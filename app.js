@@ -70,7 +70,7 @@ lobbyFertig.addEventListener("click", () => {
             grundstücke: []
         })
 
-        text = `${gameState.get(id).name}: ${gameState.get(id).geld}$\n`;
+        text += `${gameState.get(id).name}: ${gameState.get(id).geld}$\n`;
     };
 
    
