@@ -56,6 +56,7 @@ function invite_Players(id) {
 
 const gameState = new Map();
 const bankdiv = document.createElement("div");
+let bankdiv_text;
 
 lobbyFertig.addEventListener("click", () => {
     lobbyFertig.classList.add("invisible");
@@ -68,9 +69,14 @@ lobbyFertig.addEventListener("click", () => {
             geld: 1500,
             grundstücke: []
         })
+
+        text = `${gameState.get(id).name}: ${gameState.get(id).geld}$\n`;
     };
 
-    innerText = "${"
+   
+
+    bankdiv.innerText = bankdiv_text;
+    document.getElementById(bankdiv).appendChild(bankdiv);
 });
 
 function debug(msg) { //statt Console
