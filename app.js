@@ -27,7 +27,7 @@ startgame.addEventListener("click", async () => {
 
         debug(nfcID);
         if (gameMode === "waiting_for_players") {
-            debug(invite_Players(nfcID));
+            invite_Players(nfcID);
 
         }
         if (gameMode === "waiting_for_next_action") {
@@ -81,6 +81,7 @@ lobbyFertig.addEventListener("click", () => {
     bankdiv.innerText = bankdiv_text;
     document.getElementById("main").appendChild(bankdiv);
 });
+
 
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";
