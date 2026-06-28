@@ -31,7 +31,7 @@ startgame.addEventListener("click", async () => {
 
         }
         if (gameMode === "waiting_for_next_action") {
-            
+            feldINFO(nfcID);
         }
     };
 });
@@ -82,6 +82,13 @@ lobbyFertig.addEventListener("click", () => {
     document.getElementById("main").appendChild(bankdiv);
 });
 
+function feldINFO (id) {
+    document.getElementById("feldINFO-popup").classList.remove("invisible");
+
+    document.getElementById("feldINFO-popup-title").innerText = data[id]?.name;
+    document.getElementById("feldINFO-popup-preis").innerText = data[id]?.name;
+    
+};
 
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";

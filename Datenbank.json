@@ -18,5 +18,10 @@
         "typ": "Spieler",
         "name": "Auto",
         "spezial": ""
+    },
+    "5": {
+        "typ": "Feld",
+        "name": "Badstraße",
+        "miete": "60"
     }
 }
