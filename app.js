@@ -88,6 +88,7 @@ function feldINFO (id) {
 
     document.getElementById("feldINFO-popup-title").innerText = data[id]?.name;
     document.getElementById("feldINFO-popup-preis").innerText = data[id]?.preis;
+
 };
     function feldINFO_ausblenden () {
         document.getElementById("feldINFO-popup").classList.add("invisible");
