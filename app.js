@@ -29,12 +29,11 @@ startgame.addEventListener("click", async () => {
         debug("typ:" + data[nfcID]?.typ)
         if (gameMode === "waiting_for_players" && data[nfcID]?.typ === "Spieler") {
             debug(invite_Players(nfcID));
-
         }
+        
         if (gameMode === "waiting_for_next_action" && data[nfcID]?.typ === "Feld") {
             feldINFO(nfcID);
             debug("Feld ist:" + nfcID)
-
         }
     };
 });
