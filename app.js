@@ -26,7 +26,7 @@ startgame.addEventListener("click", async () => {
         nfcID = Number(new TextDecoder().decode(record.data));
 
         debug(nfcID);
-        if (gameMode === "waiting_for_players" && nfcID <= 4) {
+        if (gameMode === "waiting_for_players" && data[id]?.typ === Spieler) {
             debug(invite_Players(nfcID));
 
         }
@@ -97,5 +97,3 @@ function feldINFO (id) {
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";
 };
-
-console.log()
