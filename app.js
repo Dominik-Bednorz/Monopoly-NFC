@@ -26,7 +26,7 @@ startgame.addEventListener("click", async () => {
         nfcID = Number(new TextDecoder().decode(record.data));
 
         debug(nfcID);
-        if (gameMode === "waiting_for_players" && data[id]?.typ === Spieler) {
+        if (gameMode === "waiting_for_players" && data[nfcID]?.typ === "Spieler") {
             debug(invite_Players(nfcID));
 
         }
