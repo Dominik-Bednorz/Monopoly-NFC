@@ -26,13 +26,15 @@ startgame.addEventListener("click", async () => {
         nfcID = Number(new TextDecoder().decode(record.data));
 
         debug(nfcID);
+        debug("typ:" + data[nfcID]?.typ)
         if (gameMode === "waiting_for_players" && data[nfcID]?.typ === "Spieler") {
             debug(invite_Players(nfcID));
 
         }
-        if (gameMode === "waiting_for_next_action") {
+        if (gameMode === "waiting_for_next_action" && data[nfcID]?.typ === "Feld") {
             feldINFO(nfcID);
-            debug("Feld wird erwartet und ist:" + nfcID)
+            debug("Feld ist:" + nfcID)
+
         }
     };
 });
