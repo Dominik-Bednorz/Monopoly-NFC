@@ -32,6 +32,7 @@ startgame.addEventListener("click", async () => {
         }
         if (gameMode === "waiting_for_next_action") {
             feldINFO(nfcID);
+            debug("Feld wird erwartet und ist:" + nfcID)
         }
     };
 });
