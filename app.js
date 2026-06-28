@@ -26,7 +26,7 @@ startgame.addEventListener("click", async () => {
         nfcID = Number(new TextDecoder().decode(record.data));
 
         debug(nfcID);
-        if (gameMode === "waiting_for_players" && nfcID <= 4) {
+        if (gameMode === "waiting_for_players" && nfcIDy <= 4) {
             debug(invite_Players(nfcID));
 
         }
@@ -87,7 +87,7 @@ function feldINFO (id) {
     document.getElementById("feldINFO-popup").classList.remove("invisible");
 
     document.getElementById("feldINFO-popup-title").innerText = data[id]?.name;
-    document.getElementById("feldINFO-popup-preis").innerText = data[id]?.name;
+    document.getElementById("feldINFO-popup-preis").innerText = data[id]?.preis;
     
 };
 
