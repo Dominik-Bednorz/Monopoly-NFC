@@ -26,8 +26,8 @@ startgame.addEventListener("click", async () => {
         nfcID = Number(new TextDecoder().decode(record.data));
 
         debug(nfcID);
-        if (gameMode === "waiting_for_players") {
-            invite_Players(nfcID);
+        if (gameMode === "waiting_for_players" && ndef <= 4) {
+            debug(invite_Players(nfcID));
 
         }
         if (gameMode === "waiting_for_next_action") {
