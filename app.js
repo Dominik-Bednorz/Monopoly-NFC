@@ -36,7 +36,7 @@ startgame.addEventListener("click", async () => {
             debug("Feld ist:" + nfcID)
 
         }
-        if (gameMode === "waiting_for_next_action" && data[nfcID]?.typ === "Spieler") {
+        if (gameMode === "waiting_for_payment" && data[nfcID]?.typ === "Spieler") {
             pay(nfcID);
             debug("spieler_der_Zahlt"+ data[nfcID]?.name)
             debug("money" + gameState.get(id).geld)
