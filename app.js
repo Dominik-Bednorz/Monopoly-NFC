@@ -36,6 +36,9 @@ startgame.addEventListener("click", async () => {
             debug("Feld ist:" + nfcID)
 
         }
+        if (gameMode === "waiting_for_next_action" && data[nfcID]?.typ === "Spieler") {
+            pay(nfcID);
+        }
     };
 });
 
@@ -81,19 +84,24 @@ lobbyFertig.addEventListener("click", () => {
     document.getElementById("main").appendChild(bankdiv);
 });
 
+let aktuelle_feld_id;
+
 function feldINFO (id) {
     document.getElementById("feldINFO-popup").classList.remove("invisible");
 
     document.getElementById("feldINFO-popup-title").innerText = data[id]?.name;
     document.getElementById("feldINFO-popup-preis").innerText = data[id]?.preis;
+    aktuelle_feld_id = id;
+    gameMode = "waiting_for_payment";
 
 };
     function feldINFO_ausblenden () {
         document.getElementById("feldINFO-popup").classList.add("invisible");
+        gameMode = "waiting_for_next_action";
     };
 
 function pay (id) {
-
+    gameState.get(id).geld = gameState.get(id).geld - data[aktuelle_feld_id].preis;
 };
 
 
