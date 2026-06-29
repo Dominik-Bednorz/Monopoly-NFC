@@ -106,14 +106,9 @@ function feldINFO (id) {
 function pay (id) {
     const player = gameState.get(id);
     const field = data[aktuelle_feld_id];
-    if (!player || !field) {
-        debug("pay() skipped: Spieler oder Feld nicht gefunden");
-        return;
-    }
 
     player.geld -= field.preis;
     refresh_main();
-    gameMode = "waiting_for_next_action";
 };
 
 
