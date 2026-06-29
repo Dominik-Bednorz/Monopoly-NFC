@@ -113,7 +113,7 @@ function feldINFO (id) {
     };
 
 function pay (id) {
-    debug(data[id]?.name + ":" + gameState[id]?.geld)
+    debug(data[id]?.name + ":" + gameState.get(id)?.geld);
 };
 
 function debug(msg) { //statt Console
