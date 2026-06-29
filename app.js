@@ -75,13 +75,9 @@ lobbyFertig.addEventListener("click", () => {
             geld: 1500,
             grundstücke: []
         })
-
-        bankdiv_text += `${gameState.get(id).name}: ${gameState.get(id).geld}€\n`;
     };
 
-   
-
-    bankdiv.innerText = bankdiv_text;
+    refresh_main();
     document.getElementById("main").appendChild(bankdiv);
 });
 
@@ -95,6 +91,21 @@ function feldINFO (id) {
     function feldINFO_ausblenden () {
         document.getElementById("feldINFO-popup").classList.add("invisible");
     };
+
+function pay (id) {
+
+};
+
+
+function refresh_main () {
+    bankdiv_text = "";
+
+    for(const id of beigetreteneSpieler) {
+        bankdiv_text += `${gameState.get(id).name}: ${gameState.get(id).geld}€\n`;
+    };
+    
+    bankdiv.innerText = bankdiv_text;
+};
 
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";
