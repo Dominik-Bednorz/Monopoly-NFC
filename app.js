@@ -102,6 +102,7 @@ function feldINFO (id) {
 
 function pay (id) {
     gameState.get(id).geld = gameState.get(id).geld - data[aktuelle_feld_id].preis;
+    refresh_main();
 };
 
 
