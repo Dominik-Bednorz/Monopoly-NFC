@@ -27,13 +27,27 @@ startgame.addEventListener("click", async () => {
 
         debug(nfcID);
         debug("typ:" + data[nfcID]?.typ)
-        if (gameMode === "waiting_for_players" && data[nfcID]?.typ === "Spieler") {
+        if (gameMode === "waiting_for_players") {
+
+            if (data[nfcID]?.typ === "Spieler") {
             debug(invite_Players(nfcID));
+            }
         }
         
-        if (gameMode === "waiting_for_next_action" && data[nfcID]?.typ === "Feld") {
+        if (gameMode === "waiting_for_next_action") {
+            
+            if (data[nfcID]?.typ === "Feld") {
             feldINFO(nfcID);
             debug("Feld ist:" + nfcID)
+            gameMode = "waiting_for_payment"
+            }
+        }
+
+        if (gameMode === "waiting_for_payment") {
+
+            if (data[nfcID?.typ === "Spieler"]) {
+                
+            }
         }
     };
 });
@@ -84,16 +98,23 @@ lobbyFertig.addEventListener("click", () => {
     document.getElementById("main").appendChild(bankdiv);
 });
 
+let ausgewähltes_Feld;
+
 function feldINFO (id) {
     document.getElementById("feldINFO-popup").classList.remove("invisible");
 
     document.getElementById("feldINFO-popup-title").innerText = data[id]?.name;
     document.getElementById("feldINFO-popup-preis").innerText = data[id]?.preis;
+    ausgewähltes_Feld = id;
 
 };
     function feldINFO_ausblenden () {
         document.getElementById("feldINFO-popup").classList.add("invisible");
     };
+
+function pay (id) {
+    debug(data[id]?.name + ":" + gameState[id]?.geld)
+};
 
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";
