@@ -25,28 +25,28 @@ startgame.addEventListener("click", async () => {
         const record = message.records[0];
         nfcID = Number(new TextDecoder().decode(record.data));
 
+        debug("gameMode:" + gameMode);
         debug(nfcID);
         debug("typ:" + data[nfcID]?.typ)
-        if (gameMode === "waiting_for_players") {
 
+        if (gameMode === "waiting_for_players") {
             if (data[nfcID]?.typ === "Spieler") {
-            debug(invite_Players(nfcID));
+                debug(invite_Players(nfcID));
             }
         }
         
         if (gameMode === "waiting_for_next_action") {
-            
             if (data[nfcID]?.typ === "Feld") {
-            feldINFO(nfcID);
-            debug("Feld ist:" + nfcID)
-            gameMode = "waiting_for_payment"
+                feldINFO(nfcID);
+                debug("Feld ist:" + nfcID)
+                gameMode = "waiting_for_payment";
+                debug("gameMode changed to:" + gameMode);
             }
         }
 
         if (gameMode === "waiting_for_payment") {
-
-            if (data[nfcID?.typ === "Spieler"]) {
-                
+            if (data[nfcID]?.typ === "Spieler") {
+                debug("Zahlungskandidat:" + data[nfcID]?.name);
             }
         }
     };
