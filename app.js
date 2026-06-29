@@ -38,8 +38,9 @@ startgame.addEventListener("click", async () => {
         }
         if (gameMode === "waiting_for_payment" && data[nfcID]?.typ === "Spieler") {
             pay(nfcID);
-            debug("spieler_der_Zahlt"+ data[nfcID]?.name)
-            debug("money" + gameState.get(id).geld)
+            feldINFO_ausblenden();
+            debug("spieler_der_Zahlt " + data[nfcID]?.name)
+            debug("money " + gameState.get(nfcID)?.geld)
         }
     };
 });
@@ -103,8 +104,16 @@ function feldINFO (id) {
     };
 
 function pay (id) {
-    gameState.get(id).geld = gameState.get(id).geld - data[aktuelle_feld_id].preis;
+    const player = gameState.get(id);
+    const field = data[aktuelle_feld_id];
+    if (!player || !field) {
+        debug("pay() skipped: Spieler oder Feld nicht gefunden");
+        return;
+    }
+
+    player.geld -= field.preis;
     refresh_main();
+    gameMode = "waiting_for_next_action";
 };
 
 
