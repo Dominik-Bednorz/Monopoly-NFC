@@ -38,6 +38,8 @@ startgame.addEventListener("click", async () => {
         }
         if (gameMode === "waiting_for_next_action" && data[nfcID]?.typ === "Spieler") {
             pay(nfcID);
+            debug("spieler_der_Zahlt"+ data[nfcID]?.name)
+            debug("money" + gameState.get(id).geld)
         }
     };
 });
