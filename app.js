@@ -25,29 +25,16 @@ startgame.addEventListener("click", async () => {
         const record = message.records[0];
         nfcID = Number(new TextDecoder().decode(record.data));
 
-        debug("gameMode:" + gameMode);
         debug(nfcID);
         debug("typ:" + data[nfcID]?.typ)
+        if (gameMode === "waiting_for_players" && data[nfcID]?.typ === "Spieler") {
+            debug(invite_Players(nfcID));
 
-        if (gameMode === "waiting_for_players") {
-            if (data[nfcID]?.typ === "Spieler") {
-                debug(invite_Players(nfcID));
-            }
         }
-        
-        if (gameMode === "waiting_for_next_action") {
-            if (data[nfcID]?.typ === "Feld") {
-                feldINFO(nfcID);
-                debug("Feld ist:" + nfcID)
-                gameMode = "waiting_for_payment";
-                debug("gameMode changed to:" + gameMode);
-            }
-        }
+        if (gameMode === "waiting_for_next_action" && data[nfcID]?.typ === "Feld") {
+            feldINFO(nfcID);
+            debug("Feld ist:" + nfcID)
 
-        if (gameMode === "waiting_for_payment") {
-            if (data[nfcID]?.typ === "Spieler") {
-                debug("Zahlungskandidat:" + data[nfcID]?.name);
-            }
         }
     };
 });
@@ -98,23 +85,16 @@ lobbyFertig.addEventListener("click", () => {
     document.getElementById("main").appendChild(bankdiv);
 });
 
-let ausgewähltes_Feld;
-
 function feldINFO (id) {
     document.getElementById("feldINFO-popup").classList.remove("invisible");
 
     document.getElementById("feldINFO-popup-title").innerText = data[id]?.name;
     document.getElementById("feldINFO-popup-preis").innerText = data[id]?.preis;
-    ausgewähltes_Feld = id;
 
 };
     function feldINFO_ausblenden () {
         document.getElementById("feldINFO-popup").classList.add("invisible");
     };
-
-function pay (id) {
-    debug(data[id]?.name + ":" + gameState.get(id)?.geld);
-};
 
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";
