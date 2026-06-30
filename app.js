@@ -120,8 +120,11 @@ function pay (id) {
     const player = gameState.get(id);
     const field = data[aktuelle_feld_id];
 
+    if (!player.grundstücke.includes(aktuelle_feld_id)) {
     player.geld -= field.preis;
+    player.grundstücke.push(aktuelle_feld_id);
     refresh_main();
+    };
 };
 
 
