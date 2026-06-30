@@ -114,35 +114,40 @@ function feldINFO (id) {
         gameMode = "waiting_for_next_action";
     };
 
-function pay(id) {
-    const player = gameState.get(id);
+function pay(playerId) {
+
+    const player = gameState.get(playerId);
     const field = data[aktuelle_feld_id];
-    const besitzerId = getBesitzer(aktuelle_feld_id);
+    const ownerId = getBesitzer(aktuelle_feld_id);
 
-    if (!player || !field) {
-        debug("Zahlung konnte nicht verarbeitet werden");
-        return;
-    }
+    if (!player || !field) return;
 
-    if (besitzerId === null) {
+    // 🟢 FREI → kaufen
+    if (ownerId === null) {
+
         player.geld -= Number(field.preis);
         player.grundstuecke.push(aktuelle_feld_id);
 
-        debug("Spieler der zahlt: " + player.name);
-        debug("Money: " + player.geld);
+        debug(player.name + " hat gekauft: " + field.name);
         refresh_main();
         return;
     }
 
-    const mietpreis = Number(field.preis) / 2;
-    player.geld -= mietpreis;
+    // 🔴 BESITZT EIN ANDERER → Miete
+    if (ownerId !== playerId) {
 
-    const besitzer = gameState.get(besitzerId);
-    if (besitzer) {
-        besitzer.geld += mietpreis;
+        const mietpreis = Number(field.preis) / 2;
+
+        player.geld -= mietpreis;
+        gameState.get(ownerId).geld += mietpreis;
+
+        debug(player.name + " zahlt Miete an " + gameState.get(ownerId).name);
+        refresh_main();
+        return;
     }
 
-    refresh_main();
+    // 🟡 EIGENES FELD
+    debug("Eigenes Feld");
 }
 
 function getBesitzer(feldId) {
