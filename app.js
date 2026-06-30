@@ -123,7 +123,7 @@ function refresh_main () {
 };
 
 function error_sound () {
-    const audio = new Audio('\sounds\error.mp3');
+    const audio = new Audio("./sounds/error.mp3");
 };
 
 
