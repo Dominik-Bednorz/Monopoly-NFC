@@ -124,7 +124,7 @@ function pay(id) {
         player.grundstuecke.push(aktuelle_feld_id);
 
         debug("Spieler der zahlt: " + data[nfcID].name);
-        debug("Money: " + gameState.get(nfcID).geld);#
+        debug("Money: " + gameState.get(nfcID).geld);
 
         return;
     }
