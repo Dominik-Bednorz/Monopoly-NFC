@@ -122,6 +122,11 @@ function refresh_main () {
     bankdiv.innerText = bankdiv_text;
 };
 
+function error_sound () {
+    const audio = new Audio('\sounds\error.mp3');
+};
+
+
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";
 };
