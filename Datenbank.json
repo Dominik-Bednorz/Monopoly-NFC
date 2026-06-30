@@ -20,8 +20,88 @@
         "spezial": ""
     },
     "5": {
+    "typ": "Feld",
+    "name": "Badstraße",
+    "preis": "60"
+    },
+    "6": {
         "typ": "Feld",
-        "name": "Badstraße",
-        "preis": "60"
+        "name": "",
+        "preis": ""
+    },
+    "7": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "8": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "9": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "10": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "11": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "12": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "13": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "14": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "15": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "16": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "17": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "18": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "19": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "20": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
+    },
+    "21": {
+        "typ": "Feld",
+        "name": "",
+        "preis": ""
     }
 }
