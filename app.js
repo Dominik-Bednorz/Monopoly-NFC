@@ -90,7 +90,7 @@ lobbyFertig.addEventListener("click", () => {
         gameState.set(id, {
             name: data[id].name,
             geld: 1500,
-            grundstücke: []
+            grundstuecke: []
         })
     };
 
@@ -117,32 +117,41 @@ function feldINFO (id) {
 function pay(id) {
     const player = gameState.get(id);
     const field = data[aktuelle_feld_id];
-    const besitzer = getBesitzer(aktuelle_feld_id);
-    debug(besitzer);
+    const besitzerId = getBesitzer(aktuelle_feld_id);
 
-    if (besitzer === null) {
-        player.geld -= field.preis;
+    if (!player || !field) {
+        debug("Zahlung konnte nicht verarbeitet werden");
+        return;
+    }
+
+    if (besitzerId === null) {
+        player.geld -= Number(field.preis);
         player.grundstuecke.push(aktuelle_feld_id);
 
         debug("Spieler der zahlt: " + player.name);
         debug("Money: " + player.geld);
-
+        refresh_main();
         return;
     }
 
-    player.geld -= field.preis/2;
-    besitzer += field.preis/2;
+    const mietpreis = Number(field.preis) / 2;
+    player.geld -= mietpreis;
+
+    const besitzer = gameState.get(besitzerId);
+    if (besitzer) {
+        besitzer.geld += mietpreis;
+    }
+
     refresh_main();
 }
 
 function getBesitzer(feldId) {
-
     for (const spielerId of beigetreteneSpieler) {
+        const spieler = gameState.get(spielerId);
 
-        if (gameState.get(spielerId).grundstuecke.includes(feldId)) {
+        if (spieler?.grundstuecke?.includes(feldId)) {
             return spielerId;
         }
-
     }
 
     return null;
