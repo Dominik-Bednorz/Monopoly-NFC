@@ -148,7 +148,7 @@ function pay(playerId) {
 
     // 🟡 EIGENES FELD
     debug("Eigenes Feld");
-}
+};
 
 function getBesitzer(feldId) {
     for (const spielerId of beigetreteneSpieler) {
@@ -160,7 +160,7 @@ function getBesitzer(feldId) {
     }
 
     return null;
-}
+};
 
 function refresh_main () {
     bankdiv_text = "";
