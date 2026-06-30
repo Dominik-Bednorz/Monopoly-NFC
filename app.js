@@ -118,6 +118,7 @@ function pay(id) {
     const player = gameState.get(id);
     const field = data[aktuelle_feld_id];
     const besitzer = getBesitzer(aktuelle_feld_id);
+    debug(besitzer);
 
     if (besitzer === null) {
         player.geld -= field.preis;
