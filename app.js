@@ -27,21 +27,34 @@ startgame.addEventListener("click", async () => {
 
         debug(nfcID);
         debug("typ:" + data[nfcID]?.typ)
-        if (gameMode === "waiting_for_players" && data[nfcID]?.typ === "Spieler") {
-            debug(invite_Players(nfcID));
 
-        }
-        if (gameMode === "waiting_for_next_action" && data[nfcID]?.typ === "Feld") {
-            feldINFO(nfcID);
-            debug("Feld ist:" + nfcID)
+        const typ = data[nfcID]?.typ;
 
-        }
-        if (gameMode === "waiting_for_payment" && data[nfcID]?.typ === "Spieler") {
-            pay(nfcID);
-            feldINFO_ausblenden();
-            debug("spieler_der_Zahlt " + data[nfcID]?.name)
-            debug("money " + gameState.get(nfcID)?.geld)
-        }
+        switch (gameMode) {
+
+            case "waiting_for_players":
+                if (typ === "Spieler") {
+                    debug(invite_Players(nfcID));
+                }
+                break;
+
+            case "waiting_for_next_action":
+                if (typ === "Feld") {
+                    feldINFO(nfcID);
+                    debug("Feld ist: " + nfcID);
+                }
+                break;
+
+            case "waiting_for_payment":
+                if (typ === "Spieler") {
+                    pay(nfcID);
+                    feldINFO_ausblenden();
+
+                    debug("Spieler der zahlt: " + data[nfcID].name);
+                    debug("Money: " + gameState.get(nfcID).geld);
+                }
+                break;
+        };
     };
 });
 
