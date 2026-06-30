@@ -123,14 +123,14 @@ function pay(id) {
         player.geld -= field.preis;
         player.grundstuecke.push(aktuelle_feld_id);
 
-        debug("Spieler der zahlt: " + data[nfcID].name);
-        debug("Money: " + gameState.get(nfcID).geld);
+        debug("Spieler der zahlt: " + data[id].name);
+        debug("Money: " + gameState.get(id).geld);
 
         return;
     }
 
     player.geld -= field.preis/2;
-    besitzer.geld += field.preis/2;
+    besitzer += field.preis/2;
     refresh_main();
 }
 
