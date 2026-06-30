@@ -50,8 +50,6 @@ startgame.addEventListener("click", async () => {
                     pay(nfcID);
                     feldINFO_ausblenden();
 
-                    debug("Spieler der zahlt: " + data[nfcID].name);
-                    debug("Money: " + gameState.get(nfcID).geld);
                 }
                 break;
         };
@@ -116,17 +114,38 @@ function feldINFO (id) {
         gameMode = "waiting_for_next_action";
     };
 
-function pay (id) {
+function pay(id) {
     const player = gameState.get(id);
     const field = data[aktuelle_feld_id];
+    const besitzer = getBesitzer(aktuelle_feld_id);
 
-    if (!player.grundstücke.includes(aktuelle_feld_id)) {
-    player.geld -= field.preis;
-    player.grundstücke.push(aktuelle_feld_id);
+    if (besitzer === null) {
+        player.geld -= field.preis;
+        player.grundstuecke.push(aktuelle_feld_id);
+
+        debug("Spieler der zahlt: " + data[nfcID].name);
+        debug("Money: " + gameState.get(nfcID).geld);#
+
+        return;
+    }
+
+    player.geld -= field.preis/2;
+    besitzer.geld += field.preis/2;
     refresh_main();
-    };
-};
+}
 
+function getBesitzer(feldId) {
+
+    for (const spielerId of beigetreteneSpieler) {
+
+        if (gameState.get(spielerId).grundstuecke.includes(feldId)) {
+            return spielerId;
+        }
+
+    }
+
+    return null;
+}
 
 function refresh_main () {
     bankdiv_text = "";
