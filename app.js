@@ -123,8 +123,8 @@ function pay(id) {
         player.geld -= field.preis;
         player.grundstuecke.push(aktuelle_feld_id);
 
-        debug("Spieler der zahlt: " + data[id].name);
-        debug("Money: " + gameState.get(id).geld);
+        debug("Spieler der zahlt: " + player.name);
+        debug("Money: " + player.geld);
 
         return;
     }
