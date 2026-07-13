@@ -36,6 +36,10 @@ startgame.addEventListener("click", async () => {
                 if (typ === "Spieler") {
                     debug(invite_Players(nfcID));
                 }
+                else {
+                    debug("Nur Spieler können beitreten");
+                    error_sound();
+                }
                 break;
 
             case "waiting_for_next_action":
@@ -61,6 +65,12 @@ startgame.addEventListener("click", async () => {
                     debug("Ereigniskarte wird ausgeführt: " + nfcID);
                     Ereignis_ausführen(nfcID);
                     EreigniskarteINFO_ausblenden();
+                }
+            case "buttonMode":
+                if (typ === "Spieler") {
+                    const player = gameState.get(nfcID);
+                    playerResolver(player);
+                    playerResolver = null;
                 }
         };
     };
@@ -210,6 +220,35 @@ function refresh_main () {
     bankdiv.innerText = bankdiv_text;
 };
 
+//Buttons
+
+let playerResolver = null;
+
+function getPlayer() {
+    return new Promise((resolve) => {
+        playerResolver = resolve;
+    });
+}
+
+async function LOS_button() {
+    gameMode = "buttonMode";
+    debug("Spieler scannen...");
+    const player = await getPlayer(id);
+    player.geld += 200;
+    refresh_main();
+    gameMode = "waiting_for_next_action";
+};
+
+async function Gefängnis_button() {
+    gameMode = "buttonMode";
+    debug("Spieler scannen...");
+    const player = await getPlayer(id);
+    player.geld -= 100;
+    refresh_main();
+    gameMode = "waiting_for_next_action";
+}
+
+//Sounds
 function error_sound () {
     const error_audio = new Audio("./sounds/error.mp3");
     error_audio.play();
