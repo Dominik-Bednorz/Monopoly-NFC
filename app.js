@@ -194,7 +194,7 @@ function Ereignis_ausführen (id) {
 
     if (!player) return;
 
-    player.geld += [id]?.Number(ereignis["backend-action"]);
+    player.geld += ereignis["backend-action"];
     debug(player.name + " hat " + ereignis["backend-action"] + "€ erhalten.");
     refresh_main();
 
