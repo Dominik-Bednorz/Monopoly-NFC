@@ -116,6 +116,7 @@ lobbyFertig.addEventListener("click", () => {
 
     refresh_main();
     document.getElementById("main").appendChild(bankdiv);
+    document.getElementById("player-buttons").classList.remove("invisible");
 });
 
 let aktuelle_id;
