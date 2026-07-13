@@ -103,5 +103,11 @@
         "typ": "Feld",
         "name": "",
         "preis": ""
+    },
+    "22": {
+        "typ": "Ereigniskarte",
+        "titel": "Du gewinnst einen Korb voller Spielzeug für deine Haustiere!",
+        "beschreibung": "Ziehe 20€ ein.",
+        "backend-action": "20"
     }
 }

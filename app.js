@@ -43,6 +43,10 @@ startgame.addEventListener("click", async () => {
                     feldINFO(nfcID);
                     debug("Feld ist: " + nfcID);
                 }
+                if (typ === "Ereigniskarte") {
+                    EreigniskarteINFO(nfcID);
+                    debug("Ereigniskarte ist: " + nfcID);
+                }
                 break;
 
             case "waiting_for_payment":
@@ -52,6 +56,12 @@ startgame.addEventListener("click", async () => {
 
                 }
                 break;
+            case "waiting_for_Ereignis_interaction":
+                if (typ === "Spieler") {
+                    debug("Ereigniskarte wird ausgeführt: " + nfcID);
+                    Ereignis_ausführen(nfcID);
+                    EreigniskarteINFO_ausblenden();
+                }
         };
     };
 });
@@ -148,6 +158,7 @@ function pay(playerId) {
 
     // 🟡 EIGENES FELD
     debug("Eigenes Feld");
+    error_sound();
 };
 
 function getBesitzer(feldId) {
@@ -160,6 +171,31 @@ function getBesitzer(feldId) {
     }
 
     return null;
+};
+
+function EreigniskarteINFO (id) {
+    document.getElementById("EreigniskarteINFO-popup").classList.remove("invisible");
+
+    document.getElementById("EreigniskarteINFO-popup-title").innerText = data[id]?.titel;
+    document.getElementById("EreigniskarteINFO-popup-beschreibung").innerText = data[id]?.beschreibung;
+    gameMode = "waiting_for_Ereignis_interaction"
+};
+
+    function EreigniskarteINFO_ausblenden () {
+        document.getElementById("EreigniskarteINFO-popup").classList.add("invisible");
+        gameMode = "waiting_for_next_action";
+};
+
+function Ereignis_ausführen (id) {
+    const player = gameState.get(id);
+    const ereignis = data[aktuelle_feld_id];
+
+    if (!player) return;
+
+    player.geld += Number(ereignis["backend-action"]);
+    debug(player.name + " hat " + ereignis["backend-action"] + "€ erhalten.");
+    refresh_main();
+
 };
 
 function refresh_main () {
