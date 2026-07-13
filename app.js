@@ -188,6 +188,7 @@ function EreigniskarteINFO (id) {
 };
 
 function Ereignis_ausführen (id) {
+    debug("fibfiuwbfwilerbgiseblg");
     const player = gameState.get(id);
     const ereignis = data[aktuelle_id];
 
