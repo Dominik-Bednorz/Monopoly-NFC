@@ -194,7 +194,7 @@ function Ereignis_ausführen (id) {
 
     if (!player) return;
 
-    player.geld += ereignis["backend-action"];
+    player.geld += Number(ereignis["backend-action"]);
     debug(player.name + " hat " + ereignis["backend-action"] + "€ erhalten.");
     refresh_main();
 
