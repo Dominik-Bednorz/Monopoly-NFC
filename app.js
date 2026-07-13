@@ -66,12 +66,16 @@ startgame.addEventListener("click", async () => {
                     Ereignis_ausführen(nfcID);
                     EreigniskarteINFO_ausblenden();
                 }
+                break;
             case "buttonMode":
                 if (typ === "Spieler") {
-                    const player = gameState.get(nfcID);
-                    playerResolver(player);
-                    playerResolver = null;
+                    debug("Buttonaktion: Spieler gescannt " + nfcID);
+                    if (playerResolver) {
+                        playerResolver(nfcID);
+                        playerResolver = null;
+                    }
                 }
+                break;
         };
     };
 });
@@ -234,17 +238,37 @@ function getPlayer() {
 async function LOS_button() {
     gameMode = "buttonMode";
     debug("Spieler scannen...");
-    const player = await getPlayer(id);
+    const playerId = await getPlayer();
+    const player = gameState.get(playerId);
+
+    if (!player) {
+        debug("Ungültiger Spieler oder kein Spieler gefunden.");
+        error_sound();
+        gameMode = "waiting_for_next_action";
+        return;
+    }
+
     player.geld += 200;
+    debug(player.name + " erhält 200€ für LOS.");
     refresh_main();
     gameMode = "waiting_for_next_action";
-};
+}
 
 async function Gefängnis_button() {
     gameMode = "buttonMode";
     debug("Spieler scannen...");
-    const player = await getPlayer(id);
+    const playerId = await getPlayer();
+    const player = gameState.get(playerId);
+
+    if (!player) {
+        debug("Ungültiger Spieler oder kein Spieler gefunden.");
+        error_sound();
+        gameMode = "waiting_for_next_action";
+        return;
+    }
+
     player.geld -= 100;
+    debug(player.name + " bezahlt 100€ für Gefängnis.");
     refresh_main();
     gameMode = "waiting_for_next_action";
 }
