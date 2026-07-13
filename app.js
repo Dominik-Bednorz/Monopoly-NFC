@@ -108,14 +108,14 @@ lobbyFertig.addEventListener("click", () => {
     document.getElementById("main").appendChild(bankdiv);
 });
 
-let aktuelle_feld_id;
+let aktuelle_id;
 
 function feldINFO (id) {
     document.getElementById("feldINFO-popup").classList.remove("invisible");
 
     document.getElementById("feldINFO-popup-title").innerText = data[id]?.name;
     document.getElementById("feldINFO-popup-preis").innerText = data[id]?.preis;
-    aktuelle_feld_id = id;
+    aktuelle_id = id;
     gameMode = "waiting_for_payment";
 
 };
@@ -127,8 +127,8 @@ function feldINFO (id) {
 function pay(playerId) {
 
     const player = gameState.get(playerId);
-    const field = data[aktuelle_feld_id];
-    const ownerId = getBesitzer(aktuelle_feld_id);
+    const field = data[aktuelle_id];
+    const ownerId = getBesitzer(aktuelle_id);
 
     if (!player || !field) return;
 
@@ -136,7 +136,7 @@ function pay(playerId) {
     if (ownerId === null) {
 
         player.geld -= Number(field.preis);
-        player.grundstuecke.push(aktuelle_feld_id);
+        player.grundstuecke.push(aktuelle_id);
 
         debug(player.name + " hat gekauft: " + field.name);
         refresh_main();
@@ -178,6 +178,7 @@ function EreigniskarteINFO (id) {
 
     document.getElementById("EreigniskarteINFO-popup-title").innerText = data[id]?.titel;
     document.getElementById("EreigniskarteINFO-popup-beschreibung").innerText = data[id]?.beschreibung;
+    aktuelle_id = id;
     gameMode = "waiting_for_Ereignis_interaction"
 };
 
@@ -188,7 +189,7 @@ function EreigniskarteINFO (id) {
 
 function Ereignis_ausführen (id) {
     const player = gameState.get(id);
-    const ereignis = data[aktuelle_feld_id];
+    const ereignis = data[aktuelle_id];
 
     if (!player) return;
 
