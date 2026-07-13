@@ -20,9 +20,9 @@
         "spezial": ""
     },
     "5": {
-    "typ": "Feld",
-    "name": "Badstraße",
-    "preis": "60"
+        "typ": "Feld",
+        "name": "Badstraße",
+        "preis": "60"
     },
     "6": {
         "typ": "Feld",
