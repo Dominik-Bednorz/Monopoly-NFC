@@ -203,7 +203,6 @@ function EreigniskarteINFO (id) {
 };
 
 function Ereignis_ausführen (id) {
-    debug("fibfiuwbfwilerbgiseblg");
     const player = gameState.get(id);
     const ereignis = data[aktuelle_id];
 
@@ -222,7 +221,7 @@ function Ereignis_ausführen (id) {
             break;
 
         case "Erweiterte Logik":
-            if (id === 40 || id === 31) {
+            if (aktuelle_id === 40 || aktuelle_id === 31) {
                 const QuestionPOPUP_welcher_player = document.createElement("div");
                 const alleSieler = Array.from(beigetreteneSpieler).map(id => gameState.get(id).name);
 
