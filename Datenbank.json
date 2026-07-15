@@ -121,5 +121,138 @@
         "titel": "Du gewinnst einen Korb voller Spielzeug für deine Haustiere!",
         "beschreibung": "Ziehe 20€ ein.",
         "backend-action": "20"
+    },
+    "22": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Geldtransfer",
+        "titel": "Du gewinnst eine Privatführung durch den Zoo!",
+        "beschreibung": "Ziehe 100€ ein.",
+        "backend-action": "100"
+    },
+    "23": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Geldtransfer",
+        "titel": "Oh, nein! Ein Baum ist auf dein Auto gefallen!",
+        "beschreibung": "Zahle 100€.",
+        "backend-action": "-100"
+    },
+    "24": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Geldtransfer",
+        "titel": "Du erhältst Geld dafür, dass du jede Eissorte in deiner Eisdiele probierst!",
+        "beschreibung": "Ziehe 50€ ein.",
+        "backend-action": "50"
+    },
+    "25": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "SpielfeldONLY",
+        "titel": "DU KOMMST AUS DEM GEFÄNGNIS FREI.",
+        "beschreibung": "Behalte diese Karte, bis du sie brauchst.",
+        "backend-action": ""
+    },
+    "26": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "SpielfeldONLY",
+        "titel": "Schicke einen Spieler sofort ins Gefängnis.",
+        "beschreibung": "Er darf nicht über LOS gehen und nicht 200€ einziehen.",
+        "backend-action": ""
+    },
+    "27": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "SpielfeldONLY",
+        "titel": "GRATISREISE!",
+        "beschreibung": "Du darfst kostenlos zu irgendeinem Feld auf dem Spielplan reisen. Scanne diese Karte ein und ziehe. Befolge die Regeln des Feldes, auf dem du landest.",
+        "backend-action": ""
+    },
+    "28": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Geldtransfer",
+        "titel": "Du gewinnst eine Safari!",
+        "beschreibung": "Ziehe 100€ ein.",
+        "backend-action": "100"
+    },
+    "29": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Erweiterte Logik",
+        "titel": "Du hast deine Grundsteuer zu spät bezahlt!",
+        "beschreibung": "Zahle 30€ für jedes deiner Grundstücke.",
+        "backend-action": ""
+    },
+    "30": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Geldtransfer",
+        "titel": "Deine elektronische Abrechnung ist fällig!",
+        "beschreibung": "Zahle 150€.",
+        "backend-action": "-150"
+    },
+    "31": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Erweiterte Logik",
+        "titel": "Du gewinnst eine Reise zum Planetarium für dich und einen Freund.",
+        "beschreibung": "Wähle irgendeinen Spieler aus. Zieht jeweils 50€ ein.",
+        "backend-action": ""
+    },
+    "32": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Erweiterte Logik",
+        "titel": "Du gewinnst Konzerttickets für dich und deine Freunde!",
+        "beschreibung": "Ziehe von jedem Spieler 10€ ein.",
+        "backend-action": ""
+    },
+    "33": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "SpielfeldONLY",
+        "titel": "GEHE IN DAS GEFÄNGNIS. BEGIB DICH DIREKT DORTHIN.",
+        "beschreibung": "GEHE NICHT ÜBER LOS. ZIEHE NICHT 200€ EIN.",
+        "backend-action": ""
+    },
+    "34": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Geldtransfer",
+        "titel": "Deine Grundstücke bedeuten viel Arbeit!",
+        "beschreibung": "Zahle 50€.",
+        "backend-action": "-50"
+    },
+    "35": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Geldtransfer",
+        "titel": "Du schlägst dich immer noch mit Papierkram rum?",
+        "beschreibung": "Zahle 30€.",
+        "backend-action": "-30"
+    },
+    "36": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Geldtransfer",
+        "titel": "Du gewinnst eine Kajakfahrt!",
+        "beschreibung": "Ziehe 50€ ein.",
+        "backend-action": "50"
+    },
+    "37": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Erweiterte Logik",
+        "titel": "Du hast deine Freunde zu einer Investition überredet. Das ging gründlich daneben!",
+        "beschreibung": "Zahle jedem Spieler 50€.",
+        "backend-action": ""
+    },
+    "38": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Geldtransfer",
+        "titel": "Du schnappst deinen Lieblingssnack im Zehnerpack!",
+        "beschreibung": "Ziehe 20€ ein.",
+        "backend-action": "20"
+    },
+    "39": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "SpielfeldONLY",
+        "titel": "GRATISREISE!",
+        "beschreibung": "Du darfst kostenlos zu irgendeinem Feld auf dem Spielplan reisen. Scanne diese Karte ein und ziehe. Befolge die Regeln des Feldes, auf dem du landest.",
+        "backend-action": ""
+    },
+    "40": {
+        "typ": "Ereigniskarte",
+        "TypEreignis": "Erweiterte Logik",
+        "titel": "Du erhältst 2 Tickets für einen Freizeitpark!",
+        "beschreibung": "Wähle irgendeinen Spieler aus. Zieht jeweils 50€ ein.",
+        "backend-action": ""
     }
 }
