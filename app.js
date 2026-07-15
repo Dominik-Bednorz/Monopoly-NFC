@@ -246,8 +246,8 @@ function Ereignis_ausführen (id) {
 function handlePlayerSelection_Ereigniskarte(selectedPlayerId) {
     const selectedPlayer = gameState.get(selectedPlayerId);
     selectedPlayer.geld += 50;
-    QuestionPOPUP_welcher_player.destroy();
     refresh_main();
+    QuestionPOPUP_welcher_player.remove();
 };
 
 function refresh_main () {
