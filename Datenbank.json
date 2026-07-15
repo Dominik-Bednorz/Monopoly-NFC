@@ -107,12 +107,14 @@
         "typ": "Feld",
         "name": "Parkstraße",
         "preis": "350",
+        "preis_mit_nur_einer_Farbe": "180",
         "colorID": "8"
     },
     "20": {
         "typ": "Feld",
         "name": "Schlossallee",
         "preis": "400",
+        "preis_mit_nur_einer_Farbe": "200",
         "colorID": "8"
     },
     "21": {

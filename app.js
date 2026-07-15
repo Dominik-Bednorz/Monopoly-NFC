@@ -38,7 +38,7 @@ startgame.addEventListener("click", async () => {
                 }
                 else {
                     debug("Nur Spieler können beitreten");
-                    error_sound();
+                    playSound("error");
                 }
                 break;
 
@@ -114,7 +114,8 @@ lobbyFertig.addEventListener("click", () => {
         gameState.set(id, {
             name: data[id].name,
             geld: 1500,
-            grundstuecke: []
+            grundstuecke: [],
+            colorIDs: []
         })
     };
 
@@ -149,10 +150,16 @@ function pay(playerId) {
 
     // 🟢 FREI → kaufen
     if (ownerId === null) {
-
-        player.geld -= Number(field.preis);
+        if (player.name === "Hund" && !player.colorIDs.includes(field.colorID)) {
+        player.geld -= Number(field.preis / 2);
+        }
+        else {
+            player.geld -= Number(field.preis);
+        };
         player.grundstuecke.push(aktuelle_id);
+        player.colorIDs.push(field.colorID);
 
+        playSound("buy");
         debug(player.name + " hat gekauft: " + field.name);
         refresh_main();
         return;
@@ -160,8 +167,17 @@ function pay(playerId) {
 
     // 🔴 BESITZT EIN ANDERER → Miete
     if (ownerId !== playerId) {
+        const anzahl_an_Felder_mit_der_Farbe = player.colorIDs.filter(id => id === field.colorID).length;
 
-        const mietpreis = Number(field.preis) / 2;
+        if (anzahl_an_Felder_mit_der_Farbe >= 2) {
+            const mietpreis = Number(field.preis);
+        }
+        else if (aktuelle_id === 19 || aktuelle_id === 20) {
+            const mietpreis = Number(field.preis_mit_nur_einer_Farbe);
+        }
+        else  {
+            const mietpreis = Number(field.preis) / 2;
+        };
 
         player.geld -= mietpreis;
         gameState.get(ownerId).geld += mietpreis;
@@ -173,7 +189,7 @@ function pay(playerId) {
 
     // 🟡 EIGENES FELD
     debug("Eigenes Feld");
-    error_sound();
+    playSound("error");
 };
 
 function getBesitzer(feldId) {
@@ -212,7 +228,8 @@ function Ereignis_ausführen (id) {
 
     if (player.name === "Safe") {
         player.geld += 50;
-    } //Bonus Sound
+        playSound("bonus");
+    }
 
     switch (ereignis.TypEreignis) {
         case "Geldtransfer":
@@ -302,7 +319,7 @@ async function LOS_button() {
 
     if (!player) {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
-        error_sound();
+        playSound("error");
         gameMode = "waiting_for_next_action";
         return;
     }
@@ -321,7 +338,7 @@ async function Gefängnis_button() {
 
     if (!player) {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
-        error_sound();
+        playSound("error");
         gameMode = "waiting_for_next_action";
         return;
     }
@@ -333,10 +350,22 @@ async function Gefängnis_button() {
 }
 
 //Sounds
-function error_sound () {
-    const error_audio = new Audio("./sounds/error.mp3");
-    error_audio.play();
+const sounds = {
+    error: new Audio("./sounds/error.mp3"),
+    buy: new Audio("./sounds/buy.mp3"),
+    bonus: new Audio("./sounds/bonus.mp3"),
 };
+
+function playSound(soundName) {
+    const sound = sounds[soundName];
+
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play();
+    } else {
+        debug("Sound nicht gefunden:", soundName);
+    }
+}
 
 
 function debug(msg) { //statt Console
