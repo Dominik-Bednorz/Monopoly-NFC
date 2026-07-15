@@ -151,11 +151,11 @@ function pay(playerId) {
     // 🟢 FREI → kaufen
     if (ownerId === null) {
         if (player.name === "Hund" && !player.colorIDs.includes(field.colorID)) {
-        player.geld -= Number(field.preis / 2);
-        }
-        else {
-            player.geld -= Number(field.preis);
+        player.geld += 50;
+        playSound("bonus");
         };
+
+        player.geld -= Number(field.preis);
         player.grundstuecke.push(aktuelle_id);
         player.colorIDs.push(field.colorID);
 
