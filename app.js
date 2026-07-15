@@ -167,7 +167,7 @@ function pay(playerId) {
 
     // 🔴 BESITZT EIN ANDERER → Miete
     if (ownerId !== playerId) {
-        const anzahl_an_Felder_mit_der_Farbe = player.colorIDs.filter(id => id === field.colorID).length;
+        const anzahl_an_Felder_mit_der_Farbe = ownerId.colorIDs.filter(id => id === field.colorID).length;
         let mietpreis;
 
         if (anzahl_an_Felder_mit_der_Farbe >= 2) {
