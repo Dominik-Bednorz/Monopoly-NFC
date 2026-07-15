@@ -256,5 +256,8 @@
         "titel": "Du erhältst 2 Tickets für einen Freizeitpark!",
         "beschreibung": "Wähle irgendeinen Spieler aus. Zieht jeweils 50€ ein.",
         "backend-action": ""
+    },
+    "41": {
+        "typ": "Spezialkarte_Auto"
     }
 }

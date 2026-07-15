@@ -15,6 +15,17 @@ let nfcID = ""; //Varibale für das Auslesen der Tags
 
 document.getElementById("main").classList.add("invisible");//nur der Button ist sichtbar
 
+const Spezialkarten_AutoPOPUP = document.createElement("div");
+function Spezialkarten_AutoPOPUP_handler() {
+    if (beigetreteneSpieler.has(3)) {
+        const player = gameState.get(3);
+        player.geld += 50;
+        playSound("bonus");
+        debug("Autobonus");
+        refresh_main();
+    }
+};
+
 startgame.addEventListener("click", async () => {
     document.getElementById("startgamescreen").classList.add("invisible");
     document.getElementById("main").classList.remove("invisible");
@@ -51,6 +62,14 @@ startgame.addEventListener("click", async () => {
                     EreigniskarteINFO(nfcID);
                     debug("Ereigniskarte ist: " + nfcID);
                 }
+                if (typ === "Spezialkarte_Auto") {
+                    document.getElementById("main").appendChild(Spezialkarten_AutoPOPUP);
+                    Spezialkarten_AutoPOPUP.innerHTML = `
+                        <h2>Hast du 6 gewürfelt?</h2>
+                        <button onclick="Spezialkarten_AutoPOPUP.remove(); Spezialkarten_AutoPOPUP_handler(); gameMode = 'waiting_for_next_action';">Bestätigen</button>
+                        <button onclick="Spezialkarten_AutoPOPUP.remove();">Abbrechen</button>`;
+                }
+
                 break;
 
             case "waiting_for_payment":
@@ -181,6 +200,7 @@ function pay(playerId) {
         };
 
         player.geld -= mietpreis;
+        playSound("cash_in");
         gameState.get(ownerId).geld += mietpreis;
 
         debug(player.name + " zahlt Miete an " + gameState.get(ownerId).name);
@@ -355,6 +375,7 @@ const sounds = {
     error: new Audio("./sounds/error.mp3"),
     buy: new Audio("./sounds/buy.mp3"),
     bonus: new Audio("./sounds/bonus.mp3"),
+    cash_in: new Audio("./sounds/cash-in.mp3"),
 };
 
 function playSound(soundName) {
