@@ -210,7 +210,7 @@ function Ereignis_ausführen (id) {
 
     if (player.name === "Safe") {
         player.geld += 50;
-    }
+    } //Bonus Sound
 
     switch (ereignis.TypEreignis) {
         case "Geldtransfer":
@@ -227,12 +227,14 @@ function Ereignis_ausführen (id) {
         case "Erweiterte Logik":
             if (aktuelle_id === 40 || aktuelle_id === 31) {
                 const QuestionPOPUP_welcher_player = document.createElement("div");
-                const alleSpieler = Array.from(beigetreteneSpieler).map(id => gameState.get(id).name);
+                const alleSpieler_außer_der_der_dran_ist = Array.from(beigetreteneSpieler).filter(id => gameState.get(id).name !== player.name);
+
+                player.geld += 50;
 
                 document.getElementById("main").appendChild(QuestionPOPUP_welcher_player);
                 QuestionPOPUP_welcher_player.innerHTML = `
                     <h2>Welchen Spieler willst du noch wählen?</h2>
-                    buttons: ${alleSpieler.map(name => `<button onclick="handlePlayerSelection('${name}')">${name}</button>`).join(' ')}
+                    <p>${alleSpieler_außer_der_der_dran_ist.map(name => `<button onclick="handlePlayerSelection_Ereigniskarte('${name}')">${name}</button>`).join(' ')}</p>
                 `;
                 refresh_main();
             }
@@ -240,6 +242,13 @@ function Ereignis_ausführen (id) {
             break;
     }
 
+};
+
+function handlePlayerSelection_Ereigniskarte(selectedPlayerName) {
+    const selectedPlayerId = Array.from(beigetreteneSpieler).find(id => gameState.get(id).name === selectedPlayerName);
+    const selectedPlayer = gameState.get(selectedPlayerId);
+
+    selectedPlayer.geld += 50;
 };
 
 function refresh_main () {
