@@ -167,13 +167,13 @@ function pay(playerId) {
 
     // 🔴 BESITZT EIN ANDERER → Miete
     if (ownerId !== playerId) {
-        const anzahl_an_Felder_mit_der_Farbe = ownerId.colorIDs.filter(id => id === field.colorID).length;
+        const anzahl_an_Felder_mit_der_Farbe = gameState.get(ownerId).colorIDs.filter(id => id === field.colorID).length;
         let mietpreis;
 
         if (anzahl_an_Felder_mit_der_Farbe >= 2) {
             mietpreis = Number(field.preis);
         }
-        else if (aktuelle_id === 19 || aktuelle_id === 20) {
+        else if (field === 19 || field === 20) {
             mietpreis = Number(field.preis_mit_nur_einer_Farbe);
         }
         else  {
