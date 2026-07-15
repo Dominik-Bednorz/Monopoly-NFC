@@ -241,7 +241,7 @@ function Ereignis_ausführen (id) {
             if (aktuelle_id === 29) {
                 const Anzahl_grundstuecke_von_player = player.grundstuecke.length;
                 
-                player.geld += Anzahl_grundstuecke_von_player * 30;
+                player.geld -= Anzahl_grundstuecke_von_player * 30;
             }
 
             if (aktuelle_id === 32) {
