@@ -234,8 +234,7 @@ function Ereignis_ausführen (id) {
                 document.getElementById("main").appendChild(QuestionPOPUP_welcher_player);
                 QuestionPOPUP_welcher_player.innerHTML = `
                     <h2>Welchen Spieler willst du noch wählen?</h2>
-                    <p>${alleSpieler_außer_der_der_dran_ist.map(name => `<button onclick="handlePlayerSelection_Ereigniskarte('${name}')">${name}</button>`).join(' ')}</p>
-                `;
+                    <p>${alleSpieler_außer_der_der_dran_ist.map(id => `<button onclick="handlePlayerSelection_Ereigniskarte(${id})">${gameState.get(id).name}</button>`).join("")}</p>`;
                 refresh_main();
             }
 
@@ -244,11 +243,10 @@ function Ereignis_ausführen (id) {
 
 };
 
-function handlePlayerSelection_Ereigniskarte(selectedPlayerName) {
-    const selectedPlayerId = Array.from(beigetreteneSpieler).find(id => gameState.get(id).name === selectedPlayerName);
+function handlePlayerSelection_Ereigniskarte(selectedPlayerId) {
     const selectedPlayer = gameState.get(selectedPlayerId);
-
     selectedPlayer.geld += 50;
+    refresh_main();
 };
 
 function refresh_main () {
