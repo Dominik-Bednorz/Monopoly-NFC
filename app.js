@@ -206,6 +206,7 @@ const QuestionPOPUP_welcher_player = document.createElement("div");
 function Ereignis_ausführen (id) {
     const player = gameState.get(id);
     const ereignis = data[aktuelle_id];
+    const alleSpieler_außer_der_der_dran_ist = Array.from(beigetreteneSpieler).filter(id => gameState.get(id).name !== player.name);
 
     if (!player) return;
 
@@ -227,8 +228,6 @@ function Ereignis_ausführen (id) {
 
         case "Erweiterte Logik":
             if (aktuelle_id === 40 || aktuelle_id === 31) {
-                const alleSpieler_außer_der_der_dran_ist = Array.from(beigetreteneSpieler).filter(id => gameState.get(id).name !== player.name);
-
                 player.geld += 50;
 
                 document.getElementById("main").appendChild(QuestionPOPUP_welcher_player);
@@ -246,8 +245,6 @@ function Ereignis_ausführen (id) {
             }
 
             if (aktuelle_id === 32) {
-                const alleSpieler_außer_der_der_dran_ist = Array.from(beigetreteneSpieler).filter(id => gameState.get(id).name !== player.name);
-
                 for (const id of alleSpieler_außer_der_der_dran_ist) {
                     const otherPlayer = gameState.get(id);
                     otherPlayer.geld -= 10;
@@ -257,6 +254,14 @@ function Ereignis_ausführen (id) {
             
             }
 
+            if (aktuelle_id === 37) {
+                for (const id of alleSpieler_außer_der_der_dran_ist) {
+                    const otherPlayer = gameState.get(id);
+                    otherPlayer.geld += 50;
+                    player.geld -= 50;
+                    refresh_main();
+                }
+            }
             break;
     }
 
