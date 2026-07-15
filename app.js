@@ -242,6 +242,7 @@ function Ereignis_ausführen (id) {
                 const Anzahl_grundstuecke_von_player = player.grundstuecke.length;
                 
                 player.geld -= Anzahl_grundstuecke_von_player * 30;
+                refresh_main();
             }
 
             if (aktuelle_id === 32) {
@@ -251,6 +252,7 @@ function Ereignis_ausführen (id) {
                     const otherPlayer = gameState.get(id);
                     otherPlayer.geld -= 10;
                     player.geld += 10;
+                    refresh_main();
                 }
             
             }
