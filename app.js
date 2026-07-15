@@ -223,13 +223,16 @@ function Ereignis_ausführen (id) {
 
         case "Erweiterte Logik":
             if (id === 40 || id === 31) {
-                player.geld += Number(ereignis["backend-action"]);
-                debug(player.name + " hat " + ereignis["backend-action"] + "€ erhalten.");
-
                 const QuestionPOPUP_welcher_player = document.createElement("div");
-                QuestionPOPUP_welcher_player.id = "QuestionPOPUP-welcher-player";
+                const alleSieler = Array.from(beigetreteneSpieler).map(id => gameState.get(id).name);
+
                 document.body.getElementById("main").appendChild(QuestionPOPUP_welcher_player);
-                QuestionPOPUP_welcher_player.classList.innerText = "invisible";
+                QuestionPOPUP_welcher_player.innerHTML = `
+                    <div id="welcher_player_popup" class="popup">
+                        <h2>Welcher Spieler?</h2>
+                        <div id="welcher_player_buttons"></div>
+                    </div>
+                `;
                 refresh_main();
             }
 
