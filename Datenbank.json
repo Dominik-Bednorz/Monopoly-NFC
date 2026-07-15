@@ -22,90 +22,102 @@
     "5": {
         "typ": "Feld",
         "name": "Badstraße",
-        "preis": "60"
+        "preis": "60",
+        "colorID": "1"
     },
     "6": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Turmstraße",
+        "preis": "60",
+        "colorID": "1"
     },
     "7": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Chausseestraße",
+        "preis": "100",
+        "colorID": "2"
     },
     "8": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Elisenstraße",
+        "preis": "100",
+        "colorID": "2"
     },
     "9": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Seestraße",
+        "preis": "140",
+        "colorID": "3"
     },
     "10": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Hafenstraße",
+        "preis": "140",
+        "colorID": "3"
     },
     "11": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Münchenerstraße",
+        "preis": "180",
+        "colorID": "4"
     },
     "12": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Wienerstraße",
+        "preis": "180",
+        "colorID": "4"
     },
     "13": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Theaterstraße",
+        "preis": "220",
+        "colorID": "5"
     },
     "14": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Museumstraße",
+        "preis": "220",
+        "colorID": "5"
     },
     "15": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Lessingstraße",
+        "preis": "260",
+        "colorID": "6"
     },
     "16": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Schillerstraße",
+        "preis": "260",
+        "colorID": "6"
     },
     "17": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Rathausplatz",
+        "preis": "300",
+        "colorID": "7"
     },
     "18": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Hauptstraße",
+        "preis": "300",
+        "colorID": "7"
     },
     "19": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Parkstraße",
+        "preis": "350",
+        "colorID": "8"
     },
     "20": {
         "typ": "Feld",
-        "name": "",
-        "preis": ""
+        "name": "Schlossallee",
+        "preis": "400",
+        "colorID": "8"
     },
     "21": {
-        "typ": "Feld",
-        "name": "",
-        "preis": ""
-    },
-    "22": {
         "typ": "Ereigniskarte",
+        "TypEreignis": "Geldtransfer",
         "titel": "Du gewinnst einen Korb voller Spielzeug für deine Haustiere!",
         "beschreibung": "Ziehe 20€ ein.",
         "backend-action": "20"
