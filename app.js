@@ -223,9 +223,9 @@ function Ereignis_ausführen (id) {
         case "Erweiterte Logik":
             if (aktuelle_id === 40 || aktuelle_id === 31) {
                 const QuestionPOPUP_welcher_player = document.createElement("div");
-                const alleSieler = Array.from(beigetreteneSpieler).map(id => gameState.get(id).name);
+                const alleSpieler = Array.from(beigetreteneSpieler).map(id => gameState.get(id).name);
 
-                document.body.getElementById("main").appendChild(QuestionPOPUP_welcher_player);
+                document.getElementById("main").appendChild(QuestionPOPUP_welcher_player);
                 QuestionPOPUP_welcher_player.innerHTML = `
                     <div id="welcher_player_popup" class="popup">
                         <h2>Welcher Spieler?</h2>
