@@ -202,6 +202,7 @@ function EreigniskarteINFO (id) {
         gameMode = "waiting_for_next_action";
 };
 
+const QuestionPOPUP_welcher_player = document.createElement("div");
 function Ereignis_ausführen (id) {
     const player = gameState.get(id);
     const ereignis = data[aktuelle_id];
@@ -226,7 +227,6 @@ function Ereignis_ausführen (id) {
 
         case "Erweiterte Logik":
             if (aktuelle_id === 40 || aktuelle_id === 31) {
-                const QuestionPOPUP_welcher_player = document.createElement("div");
                 const alleSpieler_außer_der_der_dran_ist = Array.from(beigetreteneSpieler).filter(id => gameState.get(id).name !== player.name);
 
                 player.geld += 50;
@@ -246,6 +246,7 @@ function Ereignis_ausführen (id) {
 function handlePlayerSelection_Ereigniskarte(selectedPlayerId) {
     const selectedPlayer = gameState.get(selectedPlayerId);
     selectedPlayer.geld += 50;
+    QuestionPOPUP_welcher_player.destroy();
     refresh_main();
 };
 
