@@ -17,8 +17,8 @@ document.getElementById("main").classList.add("invisible");//nur der Button ist 
 
 const Spezialkarten_AutoPOPUP = document.createElement("div");
 function Spezialkarten_AutoPOPUP_handler() {
-    if (beigetreteneSpieler.has(3)) {
-        const player = gameState.get(3);
+    if (beigetreteneSpieler.has(4)) {
+        const player = gameState.get(4);
         player.geld += 50;
         playSound("bonus");
         debug("Autobonus");
