@@ -208,6 +208,10 @@ function Ereignis_ausführen (id) {
 
     if (!player) return;
 
+    if (player.name === "Safe") {
+        player.geld += 50;
+    }
+
     switch (ereignis.TypEreignis) {
         case "Geldtransfer":
             player.geld += Number(ereignis["backend-action"]);
@@ -227,10 +231,8 @@ function Ereignis_ausführen (id) {
 
                 document.getElementById("main").appendChild(QuestionPOPUP_welcher_player);
                 QuestionPOPUP_welcher_player.innerHTML = `
-                    <div id="welcher_player_popup" class="popup">
-                        <h2>Welcher Spieler?</h2>
-                        <div id="welcher_player_buttons"></div>
-                    </div>
+                    <h2>Welchen Spieler willst du noch wählen?</h2>
+                    buttons: ${alleSpieler.map(name => `<button onclick="handlePlayerSelection('${name}')">${name}</button>`).join(' ')}
                 `;
                 refresh_main();
             }
