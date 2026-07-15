@@ -168,15 +168,16 @@ function pay(playerId) {
     // 🔴 BESITZT EIN ANDERER → Miete
     if (ownerId !== playerId) {
         const anzahl_an_Felder_mit_der_Farbe = player.colorIDs.filter(id => id === field.colorID).length;
+        let mietpreis;
 
         if (anzahl_an_Felder_mit_der_Farbe >= 2) {
-            const mietpreis = Number(field.preis);
+            mietpreis = Number(field.preis);
         }
         else if (aktuelle_id === 19 || aktuelle_id === 20) {
-            const mietpreis = Number(field.preis_mit_nur_einer_Farbe);
+            mietpreis = Number(field.preis_mit_nur_einer_Farbe);
         }
         else  {
-            const mietpreis = Number(field.preis) / 2;
+            mietpreis = Number(field.preis) / 2;
         };
 
         player.geld -= mietpreis;
