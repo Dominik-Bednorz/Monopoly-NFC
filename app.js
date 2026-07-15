@@ -238,6 +238,23 @@ function Ereignis_ausführen (id) {
                 refresh_main();
             }
 
+            if (aktuelle_id === 29) {
+                const Anzahl_grundstuecke_von_player = player.grundstuecke.length;
+                
+                player.geld += Anzahl_grundstuecke_von_player * 30;
+            }
+
+            if (aktuelle_id === 32) {
+                const alleSpieler_außer_der_der_dran_ist = Array.from(beigetreteneSpieler).filter(id => gameState.get(id).name !== player.name);
+
+                for (const id of alleSpieler_außer_der_der_dran_ist) {
+                    const otherPlayer = gameState.get(id);
+                    otherPlayer.geld -= 10;
+                    player.geld += 10;
+                }
+            
+            }
+
             break;
     }
 
