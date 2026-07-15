@@ -209,9 +209,32 @@ function Ereignis_ausführen (id) {
 
     if (!player) return;
 
-    player.geld += Number(ereignis["backend-action"]);
-    debug(player.name + " hat " + ereignis["backend-action"] + "€ erhalten.");
-    refresh_main();
+    switch (ereignis.TypEreignis) {
+        case "Geldtransfer":
+            player.geld += Number(ereignis["backend-action"]);
+            debug(player.name + " hat " + ereignis["backend-action"] + "€ erhalten.");
+            refresh_main();
+
+            break;
+
+        case "SpielfeldONLY":
+            
+            break;
+
+        case "Erweiterte Logik":
+            if (id === 40 || id === 31) {
+                player.geld += Number(ereignis["backend-action"]);
+                debug(player.name + " hat " + ereignis["backend-action"] + "€ erhalten.");
+
+                const QuestionPOPUP_welcher_player = document.createElement("div");
+                QuestionPOPUP_welcher_player.id = "QuestionPOPUP-welcher-player";
+                document.body.getElementById("main").appendChild(QuestionPOPUP_welcher_player);
+                QuestionPOPUP_welcher_player.classList.innerText = "invisible";
+                refresh_main();
+            }
+
+            break;
+    }
 
 };
 
