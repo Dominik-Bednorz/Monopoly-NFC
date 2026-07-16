@@ -99,9 +99,9 @@ startgame.addEventListener("click", async () => {
             case "buttonMode":
                 if (typ === "Spieler") {
                     debug("Buttonaktion: Spieler gescannt " + nfcID);
-                    if (playerResolver) {
-                        playerResolver(nfcID);
-                        playerResolver = null;
+                    if (idTransmitter) {
+                        idTransmitter(nfcID);
+                        idTransmitter = null;
                     }
                 }
                 break;
@@ -334,18 +334,18 @@ function refresh_main () {
 
 //Buttons
 
-let playerResolver = null;
+let idTransmitter = null;
 
-function getPlayer() {
+function getPlayer_or_Field() {
     return new Promise((resolve) => {
-        playerResolver = resolve;
+        idTransmitter = resolve;
     });
 }
 
 async function LOS_button() {
     gameMode = "buttonMode";
     debug("Spieler scannen...");
-    const playerId = await getPlayer();
+    const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
     if (!player) {
@@ -364,7 +364,7 @@ async function LOS_button() {
 async function Gefängnis_button() {
     gameMode = "buttonMode";
     debug("Spieler scannen...");
-    const playerId = await getPlayer();
+    const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
     if (!player) {
@@ -383,7 +383,7 @@ async function Gefängnis_button() {
 async function Fliegen_button() {
     gameMode = "buttonMode";
     debug("Spieler scannen...");
-    const playerId = await getPlayer();
+    const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
     if (!player) {
@@ -406,6 +406,12 @@ async function Fliegen_button() {
     gameMode = "waiting_for_next_action";
 };
 
+async function Auktion_button() {
+    gameMode = "buttonMode";
+    debug("scanne Feld für Aktion...");
+    const fieldId = await getPlayer_or_Field();
+
+};
 //Sounds
 const sounds = {
     error: new Audio("./sounds/error.mp3"),
