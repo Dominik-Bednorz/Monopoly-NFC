@@ -391,13 +391,13 @@ async function Fliegen_button() {
 
     if (player.name === "Flugzeug") {
         playSound("bonus");
+        debug(player.name + " Fliegt gratis.");
     }
     else {
     player.geld -= 100;
+    debug(player.name + " bezahlt 100€ für Gefängnis.");
     };
 
-
-    debug(player.name + " bezahlt 100€ für Gefängnis.");
     refresh_main();
     gameMode = "waiting_for_next_action";
 };
