@@ -355,7 +355,7 @@ async function LOS_button() {
     debug(player.name + " erhält 200€ für LOS.");
     refresh_main();
     gameMode = "waiting_for_next_action";
-}
+};
 
 async function Gefängnis_button() {
     gameMode = "buttonMode";
@@ -374,7 +374,33 @@ async function Gefängnis_button() {
     debug(player.name + " bezahlt 100€ für Gefängnis.");
     refresh_main();
     gameMode = "waiting_for_next_action";
-}
+};
+
+async function Fliegen_button() {
+    gameMode = "buttonMode";
+    debug("Spieler scannen...");
+    const playerId = await getPlayer();
+    const player = gameState.get(playerId);
+
+    if (!player) {
+        debug("Ungültiger Spieler oder kein Spieler gefunden.");
+        playSound("error");
+        gameMode = "waiting_for_next_action";
+        return;
+    }
+
+    if (player.name === "Flugzeug") {
+        playSound("bonus");
+    }
+    else {
+    player.geld -= 100;
+    };
+
+
+    debug(player.name + " bezahlt 100€ für Gefängnis.");
+    refresh_main();
+    gameMode = "waiting_for_next_action";
+};
 
 //Sounds
 const sounds = {
