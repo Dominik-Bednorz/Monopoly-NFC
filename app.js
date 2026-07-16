@@ -7,6 +7,10 @@ async function init() {
 init();
 
 const startgame = document.getElementById("playbutton"); //festlegung des Spielstart buttons
+document.getElementById("playbutton_console").addEventListener("click", () => {
+    startgame.click();
+    document.getElementById("debug").classList.remove("invisible");
+});
 
 let gameMode = "waiting_for_players"
 
