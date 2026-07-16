@@ -105,6 +105,14 @@ startgame.addEventListener("click", async () => {
                     }
                 }
                 break;
+            case "buttonMode_Feld":
+                if (typ === "Feld") {
+                    debug("Buttonaktion: Feld gescannt " + nfcID);
+                    if (idTransmitter) {
+                        idTransmitter(nfcID);
+                        idTransmitter = null;
+                    }
+                }
         };
     };
 });
@@ -407,9 +415,11 @@ async function Fliegen_button() {
 };
 
 async function Auktion_button() {
-    gameMode = "buttonMode";
+    gameMode = "buttonMode_Feld";
     debug("scanne Feld für Aktion...");
     const fieldId = await getPlayer_or_Field();
+
+    
 
 };
 //Sounds
