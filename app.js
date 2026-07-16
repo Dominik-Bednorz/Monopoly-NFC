@@ -63,11 +63,17 @@ startgame.addEventListener("click", async () => {
                     debug("Ereigniskarte ist: " + nfcID);
                 }
                 if (typ === "Spezialkarte_Auto") {
+                    if (beigetreteneSpieler.has(4)) {
                     document.getElementById("main").appendChild(Spezialkarten_AutoPOPUP);
                     Spezialkarten_AutoPOPUP.innerHTML = `
                         <h2>Hast du 6 gewürfelt?</h2>
                         <button onclick="Spezialkarten_AutoPOPUP.remove(); Spezialkarten_AutoPOPUP_handler(); gameMode = 'waiting_for_next_action';">Bestätigen</button>
                         <button onclick="Spezialkarten_AutoPOPUP.remove();">Abbrechen</button>`;
+                    }
+                    else {
+                        debug("Spezialkarte_Auto ist nicht verfügbar, da Spieler 4 nicht beigetreten ist.");
+                        playSound("error");
+                    };
                 }
 
                 break;
