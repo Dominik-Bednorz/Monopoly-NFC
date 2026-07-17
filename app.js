@@ -352,7 +352,7 @@ function getPlayer_or_Field() {
 
 async function LOS_button() {
     gameMode = "buttonMode";
-    document.getElementById("LOS-popup").classList.add("invisible");
+    document.getElementById("LOS-popup").classList.remove("invisible");
     debug("Spieler scannen...");
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
@@ -366,6 +366,7 @@ async function LOS_button() {
 
     player.geld += 200;
     debug(player.name + " erhält 200€ für LOS.");
+    document.getElementById("LOS-popup").classList.add("invisible");
     refresh_main();
     gameMode = "waiting_for_next_action";
 };
