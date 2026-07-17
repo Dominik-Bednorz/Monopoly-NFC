@@ -370,9 +370,14 @@ async function LOS_button() {
     refresh_main();
     gameMode = "waiting_for_next_action";
 };
+    function LOSPOPUP_ausblenden() {
+        document.getElementById("LOS-popup").classList.add("invisible");
+        gameMode = "waiting_for_next_action";
+    };
 
 async function Gefängnis_button() {
     gameMode = "buttonMode";
+    document.getElementById("Gefängnis-popup").classList.remove("invisible");
     debug("Spieler scannen...");
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
@@ -386,13 +391,18 @@ async function Gefängnis_button() {
 
     player.geld -= 100;
     debug(player.name + " bezahlt 100€ für Gefängnis.");
+    document.getElementById("Gefängnis-popup").classList.add("invisible");
     refresh_main();
     gameMode = "waiting_for_next_action";
 };
+    function GefängnisPOPUP_ausblenden() {
+        document.getElementById("Gefängnis-popup").classList.add("invisible");
+    };
 
 async function Fliegen_button() {
     gameMode = "buttonMode";
     debug("Spieler scannen...");
+    document.getElementById("Fliegen-popup").classList.remove("invisible");
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
@@ -412,9 +422,13 @@ async function Fliegen_button() {
     debug(player.name + " bezahlt 100€ für Gefängnis.");
     };
 
+    document.getElementById("Fliegen-popup").classList.add("invisible");
     refresh_main();
     gameMode = "waiting_for_next_action";
 };
+    function FliegenPOPUP_ausblenden() {
+        document.getElementById("Fliegen-popup").classList.add("invisible");
+    };
 
 const AuktionPOPUP = document.createElement("div");
 async function Auktion_button() {
