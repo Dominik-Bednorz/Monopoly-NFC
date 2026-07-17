@@ -34,12 +34,19 @@
             <button id="EreigniskarteINFO-popup-button" onclick="EreigniskarteINFO_ausblenden()">Abbrechen</button>
         </div>
 
+        <div id="LOS-popup" class="invisible">
+            <h2 id="LOS-popup-title"></h2>
+            <p id="LOS-popup-beschreibung"></p>
+            <button id="LOS-popup-button" onclick="LOS_ausblenden()">Abbrechen</button>
+
+        </div>
+
         <div id="player-buttons" class="invisible">
             <button onclick="LOS_button()">LOS</button>
-            <button onclick="">Auktion</button>
+            <button onclick="Auktion_button()">Auktion</button>
             <button onclick="Gefängnis_button()">Gefängnis</button>
             <button onclick="Fliegen_button()">Fliegen</button>
-            <button onclick="">Tausch</button>
+            <button onclick="Tausch_button()">Tausch</button>
         </div>
     </div>
 

@@ -352,6 +352,7 @@ function getPlayer_or_Field() {
 
 async function LOS_button() {
     gameMode = "buttonMode";
+    document.getElementById("LOS-popup").classList.add("invisible");
     debug("Spieler scannen...");
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
@@ -414,13 +415,20 @@ async function Fliegen_button() {
     gameMode = "waiting_for_next_action";
 };
 
+const AuktionPOPUP = document.createElement("div");
 async function Auktion_button() {
     gameMode = "buttonMode_Feld";
     debug("scanne Feld für Aktion...");
     const fieldId = await getPlayer_or_Field();
 
-    
+    const field = data[fieldId];
 
+    if (!field || field.typ !== "Feld") {
+        debug("Ungültiges Feld oder kein Feld gefunden.");
+        playSound("error");
+        gameMode = "waiting_for_next_action";
+        return;
+    };
 };
 //Sounds
 const sounds = {
