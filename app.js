@@ -443,7 +443,7 @@ async function Auktion_button() {
     debug("owner:::" + owner)
     const field = data[fieldId];
 
-    if (!field || field.typ !== "Feld" || owner === null) {
+    if (!field && field.typ !== "Feld" && owner === null) {
         debug("Ungültiges Feld, kein Feld gefunden oder Feld bereits in Besitzt.");
         playSound("error");
         LOSPOPUP_ausblenden();
