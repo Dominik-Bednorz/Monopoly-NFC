@@ -432,7 +432,6 @@ async function Fliegen_button() {
         gameMode = "waiting_for_next_action";
     };
 
-const AuktionPOPUP = document.createElement("div");
 async function Auktion_button() {
     gameMode = "buttonMode_Feld";
     debug("scanne Feld für Aktion...");
@@ -443,7 +442,7 @@ async function Auktion_button() {
     debug("owner:::" + owner)
     const field = data[fieldId];
 
-    if (!field && field.typ !== "Feld" && owner === null) {
+    if (!fieldId && field.typ !== "Feld" && owner === null) {
         debug("Ungültiges Feld, kein Feld gefunden oder Feld bereits in Besitzt.");
         playSound("error");
         AuktionPOPUP_ausblenden();
@@ -463,6 +462,10 @@ async function Auktion_button() {
     function AuktionPOPUP_ausblenden() {
         document.getElementById("Auktion-popup").classList.add("invisible");
         gameMode = "waiting_for_next_action";
+
+        document.getElementById("Auktion-titel").innerText = "Warte auf Feld...";
+        document.getElementById("Auktion-text").innerText = "Scanne ein Feld ein um die Aktion zu starten";
+        document.getElementById("Auktion-popup-button-starten").classList.add("invisible");
     };
 
 //Sounds
