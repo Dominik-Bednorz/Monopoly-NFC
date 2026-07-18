@@ -446,7 +446,7 @@ async function Auktion_button() {
     if (!field && field.typ !== "Feld" && owner === null) {
         debug("Ungültiges Feld, kein Feld gefunden oder Feld bereits in Besitzt.");
         playSound("error");
-        LOSPOPUP_ausblenden();
+        AuktionPOPUP_ausblenden();
         return;
     };
 
@@ -460,7 +460,7 @@ async function Auktion_button() {
     });
 
 };
-    function LOSPOPUP_ausblenden() {
+    function AuktionPOPUP_ausblenden() {
         document.getElementById("LOS-popup").classList.add("invisible");
         gameMode = "waiting_for_next_action";
     };
