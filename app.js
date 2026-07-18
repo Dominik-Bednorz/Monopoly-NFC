@@ -440,12 +440,13 @@ async function Auktion_button() {
 
     const fieldId = await getPlayer_or_Field();
     const owner = getBesitzer(fieldId);
+    debug("owner:::" + owner)
     const field = data[fieldId];
 
     if (!field || field.typ !== "Feld" || owner === null) {
         debug("Ungültiges Feld, kein Feld gefunden oder Feld bereits in Besitzt.");
         playSound("error");
-        gameMode = "waiting_for_next_action";
+        LOSPOPUP_ausblenden();
         return;
     };
 
