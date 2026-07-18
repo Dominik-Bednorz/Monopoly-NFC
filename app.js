@@ -136,7 +136,7 @@ function invite_Players(id) {
     }
 
     return data[id]?.name + " ist beigetreten";
-}
+};
 
 const gameState = new Map();
 const bankdiv = document.createElement("div");
@@ -397,6 +397,7 @@ async function Gefängnis_button() {
 };
     function GefängnisPOPUP_ausblenden() {
         document.getElementById("Gefängnis-popup").classList.add("invisible");
+        gameMode = "waiting_for_next_action";
     };
 
 async function Fliegen_button() {
@@ -428,23 +429,41 @@ async function Fliegen_button() {
 };
     function FliegenPOPUP_ausblenden() {
         document.getElementById("Fliegen-popup").classList.add("invisible");
+        gameMode = "waiting_for_next_action";
     };
 
 const AuktionPOPUP = document.createElement("div");
 async function Auktion_button() {
     gameMode = "buttonMode_Feld";
     debug("scanne Feld für Aktion...");
-    const fieldId = await getPlayer_or_Field();
+    document.getElementById("Auktion-popup").classList.remove("invisible");
 
+    const fieldId = await getPlayer_or_Field();
+    const owner = getBesitzer(fieldId);
     const field = data[fieldId];
 
-    if (!field || field.typ !== "Feld") {
-        debug("Ungültiges Feld oder kein Feld gefunden.");
+    if (!field || field.typ !== "Feld" || owner === null) {
+        debug("Ungültiges Feld, kein Feld gefunden oder Feld bereits in Besitzt.");
         playSound("error");
         gameMode = "waiting_for_next_action";
         return;
     };
+
+    document.getElementById("Auktion-titel").innerText = field.name;
+    document.getElementById("Auktion-text").innerText = "Normalpreis:" + field.preis;
+    document.getElementById("Auktion-popup-button-starten").classList.remove("invisible");
+
+    document.getElementById("Auktion-popup-button-starten").addEventListener("click", () => {
+        
+
+    });
+
 };
+    function LOSPOPUP_ausblenden() {
+        document.getElementById("LOS-popup").classList.add("invisible");
+        gameMode = "waiting_for_next_action";
+    };
+
 //Sounds
 const sounds = {
     error: new Audio("./sounds/error.mp3"),
