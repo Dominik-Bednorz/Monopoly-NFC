@@ -442,7 +442,7 @@ async function Auktion_button() {
     debug("owner:::" + owner)
     const field = data[fieldId];
 
-    if (!fieldId && field.typ !== "Feld" && owner === null) {
+    if (!fieldId || field.typ !== "Feld" || owner === null) {
         debug("Ungültiges Feld, kein Feld gefunden oder Feld bereits in Besitzt.");
         playSound("error");
         AuktionPOPUP_ausblenden();
