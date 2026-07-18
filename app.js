@@ -461,7 +461,7 @@ async function Auktion_button() {
 
 };
     function AuktionPOPUP_ausblenden() {
-        document.getElementById("LOS-popup").classList.add("invisible");
+        document.getElementById("Auktion-popup").classList.add("invisible");
         gameMode = "waiting_for_next_action";
     };
 
