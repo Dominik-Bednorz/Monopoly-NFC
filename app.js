@@ -447,7 +447,7 @@ async function Auktion_button() {
         playSound("error");
         AuktionPOPUP_ausblenden();
         return;
-    };
+    }; //BUG
 
     document.getElementById("Auktion-titel").innerText = field.name;
     document.getElementById("Auktion-text").innerText = "Normalpreis:" + field.preis;
