@@ -177,7 +177,7 @@ function feldINFO (id) {
         gameMode = "waiting_for_next_action";
     };
 
-const Felderverfügbar = Object.values(data).filter(feld => feld.typ === "Feld").length;
+let Felderverfügbar = Object.values(data).filter(feld => feld.typ === "Feld").length;
 debug(Felderverfügbar);
 function pay(playerId) {
 
