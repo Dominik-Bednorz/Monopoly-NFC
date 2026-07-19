@@ -351,6 +351,10 @@ function getPlayer_or_Field() {
 }
 
 async function LOS_button() {
+    if (gameMode === "buttonMode") {
+        return
+    };
+
     gameMode = "buttonMode";
     document.getElementById("LOS-popup").classList.remove("invisible");
     debug("Spieler scannen...");
@@ -376,6 +380,10 @@ async function LOS_button() {
     };
 
 async function Gefängnis_button() {
+    if (gameMode === "buttonMode") {
+        return
+    };
+
     gameMode = "buttonMode";
     document.getElementById("Gefängnis-popup").classList.remove("invisible");
     debug("Spieler scannen...");
@@ -401,6 +409,10 @@ async function Gefängnis_button() {
     };
 
 async function Fliegen_button() {
+    if (gameMode === "buttonMode") {
+        return
+    };
+
     gameMode = "buttonMode";
     debug("Spieler scannen...");
     document.getElementById("Fliegen-popup").classList.remove("invisible");
@@ -433,6 +445,10 @@ async function Fliegen_button() {
     };
 
 async function Auktion_button() {
+    if (gameMode === "buttonMode") {
+        return
+    };
+
     gameMode = "buttonMode_Feld";
     debug("scanne Feld für Aktion...");
     document.getElementById("Auktion-popup").classList.remove("invisible");
@@ -447,7 +463,7 @@ async function Auktion_button() {
         playSound("error");
         AuktionPOPUP_ausblenden();
         return;
-    }; //BUG
+    };
 
     document.getElementById("Auktion-titel").innerText = field.name;
     document.getElementById("Auktion-text").innerText = "Normalpreis:" + field.preis;
@@ -468,6 +484,14 @@ async function Auktion_button() {
         document.getElementById("Auktion-popup-button-starten").classList.add("invisible");
     };
 
+function buttonAction (ButtonName) {
+    switch (ButtonName) {
+
+        case "LOS": {
+            break;
+        }
+    }
+};
 //Sounds
 const sounds = {
     error: new Audio("./sounds/error.mp3"),
