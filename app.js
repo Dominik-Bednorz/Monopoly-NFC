@@ -178,6 +178,7 @@ function feldINFO (id) {
     };
 
 const Felderverfügbar = Object.values(data).filter(feld => feld.typ === "Feld").length;
+debug(Felderverfügbar);
 function pay(playerId) {
 
     const player = gameState.get(playerId);
@@ -205,7 +206,7 @@ function pay(playerId) {
 
         if (Felderverfügbar === 0) {
             refresh_main_win();
-            
+            return;
         };
 
         playSound("buy");
