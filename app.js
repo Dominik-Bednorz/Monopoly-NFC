@@ -177,6 +177,7 @@ function feldINFO (id) {
         gameMode = "waiting_for_next_action";
     };
 
+const Felderverfügbar = Object.values(data).filter(feld => feld.typ === "Feld").length;
 function pay(playerId) {
 
     const player = gameState.get(playerId);
@@ -200,6 +201,12 @@ function pay(playerId) {
         player.geld -= Number(field.preis);
         player.grundstuecke.push(aktuelle_id);
         player.colorIDs.push(field.colorID);
+        Felderverfügbar -= 1;
+
+        if (Felderverfügbar === 0) {
+            refresh_main_win();
+            
+        };
 
         playSound("buy");
         debug(player.name + " hat gekauft: " + field.name);
@@ -344,6 +351,31 @@ function refresh_main () {
     
     bankdiv.innerText = bankdiv_text;
 };
+
+function refresh_main_win () {
+    bankdiv_text = "";
+
+    for(const id of beigetreteneSpieler) {
+        bankdiv_text += `${gameState.get(id).name}: ${getGesamtVermoegen(id)}€\n`;
+    };
+    
+    bankdiv.innerText = bankdiv_text;
+};
+function getGesamtVermoegen(id) {
+    const spieler = gameState.get(id);
+
+    let vermoegen = spieler.geld;
+
+    for (const feldId of spieler.grundstuecke) {
+        const feld = data[feldId];
+
+        if (feld) {
+            vermoegen += feld.preis;
+        }
+    }
+
+    return vermoegen;
+}
 
 //Buttons
 
@@ -503,6 +535,7 @@ const sounds = {
     buy: new Audio("./sounds/buy.mp3"),
     bonus: new Audio("./sounds/bonus.mp3"),
     cash_in: new Audio("./sounds/cash-in.mp3"),
+    win: new Audio("./sounds/win.mp3")
 };
 
 function playSound(soundName) {
