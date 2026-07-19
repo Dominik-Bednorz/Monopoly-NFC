@@ -187,9 +187,14 @@ function pay(playerId) {
 
     // 🟢 FREI → kaufen
     if (ownerId === null) {
-        if (player.name === "Hund" && !player.colorIDs.includes(field.colorID)) {
-        player.geld += 50;
-        playSound("bonus");
+        const otherFieldsSameColor = Object.entries(data)
+            .filter(([key, value]) => value.colorID === field.colorID && Number(key) !== aktuelle_id)
+            .map(([key]) => Number(key));
+        const otherFieldsUnowned = otherFieldsSameColor.every(id => getBesitzer(id) === null);
+
+        if (player.name === "Hund" && !player.colorIDs.includes(field.colorID) && otherFieldsUnowned) {
+            player.geld += 50;
+            playSound("bonus");
         };
 
         player.geld -= Number(field.preis);
