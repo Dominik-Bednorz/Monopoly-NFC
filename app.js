@@ -177,8 +177,6 @@ function feldINFO (id) {
         gameMode = "waiting_for_next_action";
     };
 
- //let Felderverfügbar = Object.values(data).filter(feld => feld.typ === "Feld").length;
-debug(Felderverfügbar);
 function pay(playerId) {
 
     const player = gameState.get(playerId);
@@ -202,12 +200,7 @@ function pay(playerId) {
         player.geld -= Number(field.preis);
         player.grundstuecke.push(aktuelle_id);
         player.colorIDs.push(field.colorID);
-       // Felderverfügbar -= 1;
-
-       // if (Felderverfügbar === 0) {
-       //     refresh_main_win();
-       //     return;
-      //  };
+        
         playSound("buy");
         debug(player.name + " hat gekauft: " + field.name);
         refresh_main();
