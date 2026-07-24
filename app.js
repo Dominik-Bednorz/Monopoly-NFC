@@ -515,9 +515,24 @@ async function Auktion_button() {
     };
 
 function buttonAction (ButtonName) {
+    if (gameMode === "buttonMode") {
+        return
+    };
+
+    gameMode = "buttonMode";
+    debug("Spieler scannen...");
+    const playerId = await getPlayer_or_Field();
+    const player = gameState.get(playerId);
+
     switch (ButtonName) {
 
         case "LOS": {
+            player.geld += 200;
+            debug(player.name + " erhält 200€ für LOS.");
+            document.getElementById("LOS-popup").classList.add("invisible");
+            refresh_main();
+            gameMode = "waiting_for_next_action";
+
             break;
         }
     }
