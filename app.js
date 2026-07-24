@@ -514,29 +514,23 @@ async function Auktion_button() {
         document.getElementById("Auktion-popup-button-starten").classList.add("invisible");
     };
 
-function buttonAction (ButtonName) {
-    if (gameMode === "buttonMode") {
-        return
-    };
-
-    gameMode = "buttonMode";
-    debug("Spieler scannen...");
-    const playerId = await getPlayer_or_Field();
-    const player = gameState.get(playerId);
-
+async function buttonAction(ButtonName) {
     switch (ButtonName) {
-
-        case "LOS": {
-            player.geld += 200;
-            debug(player.name + " erhält 200€ für LOS.");
-            document.getElementById("LOS-popup").classList.add("invisible");
-            refresh_main();
-            gameMode = "waiting_for_next_action";
-
+        case "LOS":
+            await LOS_button();
+            break;
+        case "Auktion":
+            await Auktion_button();
+            break;
+        case "Gefängnis":
+            await Gefängnis_button();
+            break;
+        case "Fliegen":
+            await Fliegen_button();
             break;
         }
-    }
 };
+
 //Sounds
 const sounds = {
     error: new Audio("./sounds/error.mp3"),
