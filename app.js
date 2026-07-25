@@ -103,10 +103,11 @@ startgame.addEventListener("click", async () => {
                         idTransmitter(nfcID);
                         idTransmitter = null;
                     }
-                    else {
-                        playSound("error");
-                    }
+                    
                 }
+                else {
+                    playSound("error");
+                    }
                 break;
             case "buttonMode_Feld":
                 if (typ === "Feld") {
