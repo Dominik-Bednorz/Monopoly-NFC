@@ -103,6 +103,9 @@ startgame.addEventListener("click", async () => {
                         idTransmitter(nfcID);
                         idTransmitter = null;
                     }
+                    else {
+                        playSound("error");
+                    }
                 }
                 break;
             case "buttonMode_Feld":
@@ -378,7 +381,7 @@ function getPlayer_or_Field() {
     return new Promise((resolve) => {
         idTransmitter = resolve;
     });
-}
+};
 
 async function LOS_button() {
     if (gameMode === "buttonMode") {
@@ -391,7 +394,7 @@ async function LOS_button() {
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
-    if (!player || data[playerId]?.typ !== "Spieler") {
+    if (!player) {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
         gameMode = "waiting_for_next_action";
