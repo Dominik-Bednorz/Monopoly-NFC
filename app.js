@@ -391,7 +391,7 @@ async function LOS_button() {
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
-    if (data[playerId]?.typ === !Spieler) {
+    if (!player || data[playerId]?.typ !== Spieler) {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
         gameMode = "waiting_for_next_action";
