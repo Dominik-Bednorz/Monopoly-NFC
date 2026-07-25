@@ -514,22 +514,6 @@ async function Auktion_button() {
         document.getElementById("Auktion-popup-button-starten").classList.add("invisible");
     };
 
-async function buttonAction(ButtonName) {
-    switch (ButtonName) {
-        case "LOS":
-            await LOS_button();
-            break;
-        case "Auktion":
-            await Auktion_button();
-            break;
-        case "Gefängnis":
-            await Gefängnis_button();
-            break;
-        case "Fliegen":
-            await Fliegen_button();
-            break;
-        }
-};
 
 //Sounds
 const sounds = {
