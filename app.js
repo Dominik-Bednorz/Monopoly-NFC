@@ -46,7 +46,7 @@ startgame.addEventListener("click", async () => {
         const typ = data[nfcID]?.typ;
 
         if (typ === Spieler) {
-            playSound(typ)
+            playSound(data[nfcID]?.name)
         };
 
         switch (gameMode) {
