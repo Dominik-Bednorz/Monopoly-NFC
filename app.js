@@ -110,7 +110,13 @@ startgame.addEventListener("click", async () => {
                         idTransmitter(nfcID);
                         idTransmitter = null;
                     }
-                    
+                }
+                else {
+                    debug("Buttonaktion: Keine Spielerkarte gescannt;" + "NfcID:" + nfcID);
+                    if (idTransmitter) {
+                        idTransmitter(nfcID);
+                        idTransmitter = null;
+                    }
                 }
                 break;
             case "buttonMode_Feld":
