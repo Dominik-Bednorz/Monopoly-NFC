@@ -528,12 +528,23 @@ async function Auktion_button() {
     };
 
     function Auktion_starten (fieldId, field) {
+        let preis_bei_Auktion = 0;
         gameMode = "NFC_gespert"
 
         document.getElementById("Auktionzähler-popup").classList.remove("invisible");
-        document.getElementById("Auktionzähler-titel").innerText = "Aktion läuft für" + field.name;
+        document.getElementById("Auktionzähler-titel").innerText = "Auktion läuft für " + field.name;
+        document.getElementById("Auktionzähler-titel").innerText = preis_bei_Auktion + "€";
+
+        function höher_bieten (zahl) {
+            preis_bei_Auktion =+ zahl;
+            document.getElementById("Auktionzähler-titel").innerText = preis_bei_Auktion + "€";
+        };
         
     };
+
+        function Auktion_starten_AUSBLENDEN () {
+
+        };
 
 //Sounds
 const sounds = {
