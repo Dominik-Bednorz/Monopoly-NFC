@@ -429,7 +429,7 @@ async function Gefängnis_button() {
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
-    if (!player || data[data]?.typ !== "Spieler") {
+    if (!player || data[playerId]?.typ !== "Spieler") {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
         GefängnisPOPUP_ausblenden();
