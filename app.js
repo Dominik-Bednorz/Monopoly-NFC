@@ -112,9 +112,6 @@ startgame.addEventListener("click", async () => {
                     }
                     
                 }
-                else {
-                    playSound("error");
-                    }
                 break;
             case "buttonMode_Feld":
                 if (typ === "Feld") {
@@ -402,7 +399,7 @@ async function LOS_button() {
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
-    if (!player) {
+    if (!player ) {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
         document.getElementById("LOS-popup").classList.add("invisible");
@@ -432,19 +429,17 @@ async function Gefängnis_button() {
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
-    if (!player) {
+    if (!player || data[data]?.typ !== "Spieler") {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
-        document.getElementById("Gefängnis-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
+        GefängnisPOPUP_ausblenden();
         return;
     }
 
     player.geld -= 100;
     debug(player.name + " bezahlt 100€ für Gefängnis.");
-    document.getElementById("Gefängnis-popup").classList.add("invisible");
+    GefängnisPOPUP_ausblenden();
     refresh_main();
-    gameMode = "waiting_for_next_action";
 };
     function GefängnisPOPUP_ausblenden() {
         document.getElementById("Gefängnis-popup").classList.add("invisible");
