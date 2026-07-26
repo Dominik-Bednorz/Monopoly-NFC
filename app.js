@@ -528,7 +528,8 @@ async function Auktion_button() {
     };
 
     let preis_bei_Auktion = 0;
-    let auktionTimer;
+    let auktionInterval;
+    let auktionTimer = 5;
 
     function Auktion_starten (fieldId, field) {
         
@@ -538,12 +539,31 @@ async function Auktion_button() {
         document.getElementById("Auktionzähler-titel").innerText = "Auktion läuft für " + field.name;
         document.getElementById("Auktionzähler-URSPRUNGpreis").innerText = "Urspunglicher Preis: " + field.preis;
         document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
+        document.getElementById("Auktionzähler-timer").innerText= "Noch " + auktionTimer + " Sekunden übrig"
+
+        auktionInterval = setInterval(() => {
+            auktionTimer -= 1;
+
+            document.getElementById("Auktionzähler-timer").innerText = "Noch " + auktionTimer + " Sekunden übrig";
+
+            if (auktionTimer <= 0) {
+
+                clearInterval(auktionInterval);
+
+                debug("Auktion beendet!");
+
+                // Hier später Auktion_beenden()
+            }
+
+        }, 1000);
 
     };
 
     function höher_bieten (zahl) {
+        auktionTimer = 5;
         preis_bei_Auktion += zahl;
         document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
+        document.getElementById("Auktionzähler-timer").innerText = "Noch " + auktionTimer + " Sekunden übrig";
     };
 
     function Auktion_starten_AUSBLENDEN () {
