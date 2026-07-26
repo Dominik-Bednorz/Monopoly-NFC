@@ -526,7 +526,7 @@ async function Auktion_button() {
 
 //Sounds
 const sounds = {
-    Hund: new Audio("./sounds/hund.pm3"),
+    Hund: new Audio("./sounds/hund.mp3"),
 
     error: new Audio("./sounds/error.mp3"),
     buy: new Audio("./sounds/buy.mp3"),
@@ -544,7 +544,7 @@ function playSound(soundName) {
     } else {
         debug("Sound nicht gefunden:", soundName);
     }
-}
+};
 
 
 function debug(msg) { //statt Console
