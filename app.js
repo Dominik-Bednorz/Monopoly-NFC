@@ -527,8 +527,10 @@ async function Auktion_button() {
         document.getElementById("Auktion-popup-button-starten").classList.add("invisible");
     };
 
+    let preis_bei_Auktion = 0;
+    
     function Auktion_starten (fieldId, field) {
-        let preis_bei_Auktion = 0;
+        
         gameMode = "NFC_gespert"
 
         document.getElementById("Auktionzähler-popup").classList.remove("invisible");
