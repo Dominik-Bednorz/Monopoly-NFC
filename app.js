@@ -45,7 +45,7 @@ startgame.addEventListener("click", async () => {
 
         const typ = data[nfcID]?.typ;
 
-        if (typ === Spieler) {
+        if (typ === "Spieler") {
             playSound(data[nfcID]?.name)
         };
 
