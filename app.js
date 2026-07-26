@@ -510,8 +510,9 @@ async function Auktion_button() {
     document.getElementById("Auktion-popup-button-starten").classList.remove("invisible");
 
     document.getElementById("Auktion-popup-button-starten").addEventListener("click", () => {
-        Auktion_starten(fieldId);
         AuktionPOPUP_ausblenden();
+        Auktion_starten(fieldId, field); //muss unten sein wegen gameMode NFC Sperre
+        
     },
     { once: true }
     );
@@ -526,8 +527,11 @@ async function Auktion_button() {
         document.getElementById("Auktion-popup-button-starten").classList.add("invisible");
     };
 
-    function Auktion_starten (fieldId) {
+    function Auktion_starten (fieldId, field) {
         gameMode = "NFC_gespert"
+
+        document.getElementById("Auktionzähler-popup").classList.remove("invisible");
+        document.getElementById("Auktionzähler-titel").innerText = "Aktion läuft für" + field.name;
         
     };
 
