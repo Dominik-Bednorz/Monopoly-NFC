@@ -488,6 +488,8 @@ async function Auktion_button() {
     if (gameMode === "buttonMode") {
         return
     };
+
+    gameMode = "buttonMode";
     debug("scanne Feld für Aktion...");
     document.getElementById("Auktion-popup").classList.remove("invisible");
 
@@ -496,7 +498,7 @@ async function Auktion_button() {
     debug("owner:::" + owner)
     const field = data[fieldId];
 
-    if (owner !== null) {
+    if (owner !== null || data[fieldId]?.typ !== "Feld") {
         debug("Ungültiges Feld, kein Feld gefunden oder Feld bereits in Besitzt.");
         playSound("error");
         AuktionPOPUP_ausblenden();
