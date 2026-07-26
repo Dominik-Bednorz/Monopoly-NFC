@@ -119,14 +119,9 @@ startgame.addEventListener("click", async () => {
                     }
                 }
                 break;
-            case "buttonMode_Feld":
-                if (typ === "Feld") {
-                    debug("Buttonaktion: Feld gescannt " + nfcID);
-                    if (idTransmitter) {
-                        idTransmitter(nfcID);
-                        idTransmitter = null;
-                    }
-                }
+            case "NFC_gespert":
+                debug("NFC ist gespert");
+                break;
         };
     };
 });
@@ -405,19 +400,17 @@ async function LOS_button() {
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
-    if (!player ) {
+    if (!player || data[playerId]?.typ !== "Spieler") {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
-        document.getElementById("LOS-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
+        LOSPOPUP_ausblenden();
         return;
     }
 
     player.geld += 200;
     debug(player.name + " erhält 200€ für LOS.");
-    document.getElementById("LOS-popup").classList.add("invisible");
+    LOSPOPUP_ausblenden();
     refresh_main();
-    gameMode = "waiting_for_next_action";
 };
     function LOSPOPUP_ausblenden() {
         document.getElementById("LOS-popup").classList.add("invisible");
@@ -436,6 +429,7 @@ async function Gefängnis_button() {
     const player = gameState.get(playerId);
 
     debug("die Player ID ist:" + playerId)
+
     if (!player || data[playerId]?.typ !== "Spieler") {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
@@ -464,11 +458,10 @@ async function Fliegen_button() {
     const playerId = await getPlayer_or_Field();
     const player = gameState.get(playerId);
 
-    if (!player) {
+    if (!player || data[playerId]?.typ !== "Spieler") {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
-        document.getElementById("Fliegen-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
+        FliegenPOPUP_ausblenden();
         return;
     }
 
@@ -483,9 +476,8 @@ async function Fliegen_button() {
 
     playSound("fliegen");
 
-    document.getElementById("Fliegen-popup").classList.add("invisible");
+    FliegenPOPUP_ausblenden();
     refresh_main();
-    gameMode = "waiting_for_next_action";
 };
     function FliegenPOPUP_ausblenden() {
         document.getElementById("Fliegen-popup").classList.add("invisible");
@@ -496,8 +488,6 @@ async function Auktion_button() {
     if (gameMode === "buttonMode") {
         return
     };
-
-    gameMode = "buttonMode_Feld";
     debug("scanne Feld für Aktion...");
     document.getElementById("Auktion-popup").classList.remove("invisible");
 
@@ -506,7 +496,7 @@ async function Auktion_button() {
     debug("owner:::" + owner)
     const field = data[fieldId];
 
-    if (owner === !null) {
+    if (owner !== null || data[fieldId]?.typ !== "Feld") {
         debug("Ungültiges Feld, kein Feld gefunden oder Feld bereits in Besitzt.");
         playSound("error");
         AuktionPOPUP_ausblenden();
@@ -518,9 +508,11 @@ async function Auktion_button() {
     document.getElementById("Auktion-popup-button-starten").classList.remove("invisible");
 
     document.getElementById("Auktion-popup-button-starten").addEventListener("click", () => {
-        
-
-    });
+        Auktion_starten(fieldId);
+        AuktionPOPUP_ausblenden();
+    },
+    { once: true }
+    );
 
 };
     function AuktionPOPUP_ausblenden() {
@@ -532,6 +524,10 @@ async function Auktion_button() {
         document.getElementById("Auktion-popup-button-starten").classList.add("invisible");
     };
 
+    function Auktion_starten (fieldId) {
+        gameMode = "NFC_gespert"
+        
+    };
 
 //Sounds
 const sounds = {
