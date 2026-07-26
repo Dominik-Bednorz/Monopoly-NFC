@@ -62,10 +62,12 @@ startgame.addEventListener("click", async () => {
                 break;
 
             case "waiting_for_next_action":
+                if (typ === "Spieler") {
+                    playSound("error");
+                }
                 if (typ === "Feld") {
                     feldINFO(nfcID);
                     debug("Feld ist: " + nfcID);
-                    playSound("error");
                 }
                 if (typ === "Ereigniskarte") {
                     EreigniskarteINFO(nfcID);
