@@ -533,11 +533,11 @@ async function Auktion_button() {
 
         document.getElementById("Auktionzähler-popup").classList.remove("invisible");
         document.getElementById("Auktionzähler-titel").innerText = "Auktion läuft für " + field.name;
-        document.getElementById("Auktionzähler-titel").innerText = preis_bei_Auktion + "€";
+        document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
 
         function höher_bieten (zahl) {
-            preis_bei_Auktion =+ zahl;
-            document.getElementById("Auktionzähler-titel").innerText = preis_bei_Auktion + "€";
+            preis_bei_Auktion += zahl;
+            document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
         };
         
     };
