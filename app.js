@@ -541,7 +541,7 @@ const sounds = {
     bonus: new Audio("./sounds/bonus.mp3"),
     cash_in: new Audio("./sounds/cash-in.mp3"),
     win: new Audio("./sounds/win.mp3"),
-    fliegen: new Audio("./sounds/fliegen.mp3"),
+    fliegen: new Audio("./sounds/fliegen.wav"),
 };
 
 function playSound(soundName) {
