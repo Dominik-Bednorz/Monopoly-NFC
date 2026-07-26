@@ -405,6 +405,7 @@ async function LOS_button() {
     if (!player) {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
+        document.getElementById("LOS-popup").classList.add("invisible");
         gameMode = "waiting_for_next_action";
         return;
     }
@@ -434,6 +435,7 @@ async function Gefängnis_button() {
     if (!player) {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
+        document.getElementById("Gefängnis-popup").classList.add("invisible");
         gameMode = "waiting_for_next_action";
         return;
     }
@@ -463,6 +465,7 @@ async function Fliegen_button() {
     if (!player) {
         debug("Ungültiger Spieler oder kein Spieler gefunden.");
         playSound("error");
+        document.getElementById("Fliegen-popup").classList.add("invisible");
         gameMode = "waiting_for_next_action";
         return;
     }
@@ -475,6 +478,8 @@ async function Fliegen_button() {
     player.geld -= 100;
     debug(player.name + " bezahlt 100€ für Gefängnis.");
     };
+
+    playSound("fliegen");
 
     document.getElementById("Fliegen-popup").classList.add("invisible");
     refresh_main();
@@ -529,12 +534,16 @@ async function Auktion_button() {
 //Sounds
 const sounds = {
     Hund: new Audio("./sounds/hund.mp3"),
+    Auto: new Audio("./sounds/auto.mp3"),
+    Safe: new Audio("./sounds/safe.mp3"),
+    Flugzeug: new Audio("./sounds/flugzeug.wav"),
 
     error: new Audio("./sounds/error.mp3"),
     buy: new Audio("./sounds/buy.mp3"),
     bonus: new Audio("./sounds/bonus.mp3"),
     cash_in: new Audio("./sounds/cash-in.mp3"),
-    win: new Audio("./sounds/win.mp3")
+    win: new Audio("./sounds/win.mp3"),
+    fliegen: new Audio("./sounds/fliegen.mp3"),
 };
 
 function playSound(soundName) {
