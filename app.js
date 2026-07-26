@@ -535,16 +535,18 @@ async function Auktion_button() {
         document.getElementById("Auktionzähler-titel").innerText = "Auktion läuft für " + field.name;
         document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
 
-        function höher_bieten (zahl) {
-            preis_bei_Auktion += zahl;
-            document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
-        };
+        
         
     };
 
-        function Auktion_starten_AUSBLENDEN () {
+    function höher_bieten (zahl) {
+        preis_bei_Auktion += zahl;
+        document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
+    };
 
-        };
+    function Auktion_starten_AUSBLENDEN () {
+
+    };
 
 //Sounds
 const sounds = {
