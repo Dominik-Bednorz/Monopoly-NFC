@@ -45,6 +45,10 @@ startgame.addEventListener("click", async () => {
 
         const typ = data[nfcID]?.typ;
 
+        if (typ === Spieler) {
+            playSound(typ)
+        };
+
         switch (gameMode) {
 
             case "waiting_for_players":
@@ -61,6 +65,7 @@ startgame.addEventListener("click", async () => {
                 if (typ === "Feld") {
                     feldINFO(nfcID);
                     debug("Feld ist: " + nfcID);
+                    playSound("error");
                 }
                 if (typ === "Ereigniskarte") {
                     EreigniskarteINFO(nfcID);
@@ -521,6 +526,8 @@ async function Auktion_button() {
 
 //Sounds
 const sounds = {
+    Hund: new Audio("./sounds/hund.pm3"),
+
     error: new Audio("./sounds/error.mp3"),
     buy: new Audio("./sounds/buy.mp3"),
     bonus: new Audio("./sounds/bonus.mp3"),
