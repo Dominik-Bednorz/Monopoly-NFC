@@ -528,17 +528,17 @@ async function Auktion_button() {
     };
 
     let preis_bei_Auktion = 0;
-    
+    let auktionTimer;
+
     function Auktion_starten (fieldId, field) {
         
         gameMode = "NFC_gespert"
 
         document.getElementById("Auktionzähler-popup").classList.remove("invisible");
         document.getElementById("Auktionzähler-titel").innerText = "Auktion läuft für " + field.name;
+        document.getElementById("Auktionzähler-URSPRUNGpreis").innerText = "Urspunglicher Preis: " + field.preis;
         document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
 
-        
-        
     };
 
     function höher_bieten (zahl) {
