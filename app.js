@@ -1,4 +1,5 @@
 let data;
+let freie_Felder = 0;
 async function init() {
     const response = await fetch("Datenbank.json");
     data = await response.json();
