@@ -575,7 +575,7 @@ async function Auktion_button() {
         
         debug("VOR GET PLAYER");
         const höchstbidender = await getPlayer_or_Field();
-        debug("NACH GET PLAYERs");
+        debug("playergotten:" + höchstbidender);
         const player = data[höchstbidender];
 
         player.geld -= preis_bei_Auktion;
