@@ -551,8 +551,7 @@ async function Auktion_button() {
                 clearInterval(auktionInterval);
 
                 debug("Auktion beendet!");
-
-                // Hier später Auktion_beenden()
+                Auktion_beendet(fieldId, field, preis_bei_Auktion)
             }
 
         }, 1000);
@@ -566,7 +565,30 @@ async function Auktion_button() {
         document.getElementById("Auktionzähler-timer").innerText = "Noch " + auktionTimer + " Sekunden übrig";
     };
 
+    function Auktion_beendet (fieldId, field, preis_bei_Auktion) {
+        Auktion_starten_AUSBLENDEN();
+        gameMode = "buttonMode"
+
+        document.getElementById("Auktion-beendet-popup").classList.remove("invisible");
+
+        document.getElementById("Auktion-beendet-titel").innerText = field.name + " wird für " + preis_bei_Auktion + " € verkauft";
+
+        const höchstbidender = await getPlayer_or_Field();
+        const player = data[höchstbidender];
+
+        player.geld -= Number(field.preis);
+        player.grundstuecke.push(fieldId);
+        player.colorIDs.push(field.colorID);
+        
+        playSound("buy");
+        debug(player.name + " hat bei einer Auktion " + field.name + " für " + preis_bei_Auktion + " € gekauft");
+        refresh_main();
+    };
+
     function Auktion_starten_AUSBLENDEN () {
+        document.getElementById("Auktionzähler-popup-button-abbrechen").classList.add("invisible");
+        gameMode = "waiting_for_next_action"
+        clearInterval(auktionInterval);
 
     };
 
