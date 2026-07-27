@@ -507,7 +507,7 @@ async function Auktion_button() {
 
     document.getElementById("Auktion-titel").innerText = field.name;
     document.getElementById("Auktion-text").innerText = "Normalpreis:" + field.preis;
-    document.querySelector("Auktion-popup-button-starten").disabled = false;
+    document.getElementById("Auktion-popup-button-starten").disabled = false;
 
     document.getElementById("Auktion-popup-button-starten").addEventListener("click", () => {
         AuktionPOPUP_ausblenden();
@@ -524,7 +524,7 @@ async function Auktion_button() {
 
         document.getElementById("Auktion-titel").innerText = "Warte auf Feld...";
         document.getElementById("Auktion-text").innerText = "Scanne ein Feld ein um die Aktion zu starten";
-        document.querySelector("Auktion-popup-button-starten").disabled = true;
+        document.getElementById("Auktion-popup-button-starten").disabled = true;
     };
 
     let preis_bei_Auktion = 0;
