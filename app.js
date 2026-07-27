@@ -533,7 +533,7 @@ async function Auktion_button() {
 
     function Auktion_starten (fieldId, field) {
         
-        gameMode = "ButtonMode"
+        gameMode = "buttonMode"
 
         document.getElementById("Auktionzähler-popup").classList.remove("invisible");
         document.getElementById("Auktionzähler-titel").innerText = "Auktion läuft für " + field.name;
@@ -639,6 +639,8 @@ async function Tausch_button() {
 
     document.getElementById("Tauschen-popup-text2").innerText = feld2.name;
     document.getElementById("Tauschen-popup-titel").innerText = "Bereit zum Tausch";
+
+    document.getElementById
 
 
 };
