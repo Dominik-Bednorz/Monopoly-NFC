@@ -173,8 +173,6 @@ lobbyFertig.addEventListener("click", () => {
     refresh_main();
     document.getElementById("main").appendChild(bankdiv);
     document.getElementById("player-buttons").classList.remove("invisible");
-
-    debug(freie_Felder);
 });
 
 let aktuelle_id;
@@ -218,6 +216,7 @@ function pay(playerId) {
         player.geld -= Number(field.preis);
         player.grundstuecke.push(aktuelle_id);
         player.colorIDs.push(field.colorID);
+        freie_Felder -= 1;
         
         playSound("buy");
         debug(player.name + " hat gekauft: " + field.name);
@@ -354,6 +353,11 @@ function handlePlayerSelection_Ereigniskarte(selectedPlayerId) {
 };
 
 function refresh_main () {
+    if (freie_Felder === 0) {
+        refresh_main_win();
+        return;
+    };
+
     bankdiv_text = "";
 
     for(const id of beigetreteneSpieler) {
@@ -372,6 +376,7 @@ async function broke(brokeguy) {
 };
 
 function refresh_main_win () {
+    playSound("win");
     bankdiv_text = "";
 
     for(const id of beigetreteneSpieler) {
@@ -598,6 +603,7 @@ async function Auktion_button() {
         player.geld -= preis_bei_Auktion;
         player.grundstuecke.push(fieldId);
         player.colorIDs.push(field.colorID);
+        freie_Felder -= 1;
         
         playSound("buy");
         debug(player.name + " hat bei einer Auktion " + field.name + " für " + preis_bei_Auktion + " € gekauft");
