@@ -538,7 +538,7 @@ async function Auktion_button() {
         document.getElementById("Auktionzähler-popup").classList.remove("invisible");
         document.getElementById("Auktionzähler-titel").innerText = "Auktion läuft für " + field.name;
         document.getElementById("Auktionzähler-URSPRUNGpreis").innerText = "Urspunglicher Preis: " + field.preis;
-        document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
+        document.getElementById("Auktionzähler-preis").innerText = "Akutelleer Preis: " + preis_bei_Auktion + "€";
         document.getElementById("Auktionzähler-timer").innerText= "Noch " + auktionTimer + " Sekunden übrig"
 
         auktionInterval = setInterval(() => {
@@ -598,6 +598,48 @@ async function Auktion_button() {
         preis_bei_Auktion = 0;
         clearInterval(auktionInterval);
 
+    };
+
+async function Tausch_button() {
+    if (gameMode === "buttonMode") {
+        return
+    };
+
+    gameMode = "buttonMode";
+    document.getElementById("Tauschen-popup").classList.remove("invisible");
+    debug("Felder Scannen...")
+
+    const feld1Id = await getPlayer_or_Field();
+    const feld1 = data[feld1Id];
+    const feld1_owner = getBesitzer(feld1Id);
+    if (feld1_owner === null || feld1.typ !== "Feld") {
+        debug("Ungültiges Feld1 oder Feld1 noch nicht im Besitz. " + "Error: " + feld1.name)
+        playSound("error");
+        Tausch_button_ausblenden();
+        return;
+    }
+    document.getElementById("Tauschen-popup-text1").innerText = feld1.name;
+
+
+    const feld2Id = await getPlayer_or_Field();
+    const feld2 = data[feld2Id];
+    const feld2_owner = getBesitzer(feld2Id);
+    if (feld2_owner === null || feld2.typ !== "Feld") {
+        debug("Ungültiges Feld2 oder Feld2 noch nicht im Besitz. " + "Error: " + feld2.name)
+        playSound("error");
+        Tausch_button_ausblenden();
+        return;
+    }
+
+    document.getElementById("Tauschen-popup-text2").innerText = feld2.name;
+};
+
+    function Tausch_button_ausblenden () {
+        document.getElementById("Tauschen-popup-text1").innerText = "Warte auf Feld 1...";
+        document.getElementById("Tauschen-popup-text2").innerText = "Warte auf Feld 2...";
+
+        document.getElementById("Tauschen-popup").classList.add("invisible");
+        gameMode = "waiting_for_next_action";
     };
 
 //Sounds
