@@ -617,7 +617,7 @@ async function Tausch_button() {
     debug("OWNER1: [" + feld1_owner + "]");
     debug("TYP1: [" + feld1?.typ + "]");
 
-    if (feld1_owner === null || feld1.typ !== "Feld") {
+    if (feld1_ownerId === null || feld1.typ !== "Feld") {
         debug("Ungültiges Feld1 oder Feld1 noch nicht im Besitz. " + "Error: " + feld1.name)
         playSound("error");
         Tausch_button_ausblenden();
@@ -632,14 +632,14 @@ async function Tausch_button() {
     const feld2_ownerId = getBesitzer(feld2Id);
     const feld2_owner = gameState.get(feld2_ownerId);
 
-    if (feld2_owner === null || feld2.typ !== "Feld") {
+    if (feld2_ownerId === null || feld2.typ !== "Feld") {
         debug("Ungültiges Feld2 oder Feld2 noch nicht im Besitz. " + "Error: " + feld2.name)
         playSound("error");
         Tausch_button_ausblenden();
         return;
     };
 
-    if (feld1_owner === feld2_owner) {
+    if (feld1_ownerId === feld2_ownerId) {
         debug("Mann kann nicht mit sich selber tauschen");
         playSound("error");
         Tausch_button_ausblenden();
