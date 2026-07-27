@@ -574,33 +574,20 @@ async function Auktion_button() {
         document.getElementById("Auktion-beendet-titel").innerText = field.name + " wird für " + preis_bei_Auktion + " € verkauft";
         
         debug("VOR GET PLAYER");
-        const höchstbidender = await getPlayer_or_Field();
-debug("ID: " + höchstbidender);
+        const höchstbidenderId = await getPlayer_or_Field();
+        debug("playergotten:" + höchstbidenderId);
+        const player = gameState.get(höchstbidenderId);
 
-const player = data[höchstbidender];
-debug("Player: " + player);
-
-player.geld -= preis_bei_Auktion;
-debug("Geld abgezogen");
-
-player.grundstuecke.push(fieldId);
-debug("Grundstück hinzugefügt");
-
-player.colorIDs.push(field.colorID);
-debug("ColorID hinzugefügt");
-
-playSound("buy");
-debug("Sound abgespielt");
-
-debug(player.name + " hat bei einer Auktion " + field.name + " für " + preis_bei_Auktion + " € gekauft");
-
-refresh_main();
-debug("Refresh fertig");
-
-gameMode = "waiting_for_next_action";
-
-document.getElementById("Auktion-beendet-popup").classList.add("invisible");
-debug("Auktion komplett beendet");
+        player.geld -= preis_bei_Auktion;
+        player.grundstuecke.push(fieldId);
+        player.colorIDs.push(field.colorID);
+        
+        playSound("buy");
+        debug(player.name + " hat bei einer Auktion " + field.name + " für " + preis_bei_Auktion + " € gekauft");
+        refresh_main();
+        
+        gameMode = "waiting_for_next_action";
+        document.getElementById("Auktion-beendet-popup").classList.add("invisible");
     };
 
     function Auktion_starten_AUSBLENDEN () {
