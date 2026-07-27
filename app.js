@@ -728,6 +728,7 @@ function playSound(soundName) {
 
 document.addEventListener("click", (event) => {
     if (event.target.closest("button")) {
+        debug("lrllsdkfkskhfgklnav")
         playSound("button_ui");
     }
 });
