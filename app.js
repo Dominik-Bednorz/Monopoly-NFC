@@ -185,8 +185,11 @@ function feldINFO (id) {
         document.getElementById("feldINFO-popup").classList.add("invisible");
         gameMode = "waiting_for_next_action";
     };
-
-
+let freie_Felder = Object.entries(data)
+    .filter(([_k, v]) => v && v.typ === "Feld")
+    .length;
+debug("Freie Felder: " + freie_Felder);
+    
 function pay(playerId) {
 
     const player = gameState.get(playerId);
