@@ -7,8 +7,6 @@ async function init() {
     freie_Felder = Object.entries(data)
         .filter(([_k, v]) => v && v.typ === "Feld")
         .length;
-
-    debug("Freie Felder: " + freie_Felder);
 }
 
 init();
@@ -175,6 +173,8 @@ lobbyFertig.addEventListener("click", () => {
     refresh_main();
     document.getElementById("main").appendChild(bankdiv);
     document.getElementById("player-buttons").classList.remove("invisible");
+
+    debug(freie_Felder);
 });
 
 let aktuelle_id;
