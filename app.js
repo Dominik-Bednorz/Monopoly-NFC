@@ -611,7 +611,8 @@ async function Tausch_button() {
 
     const feld1Id = await getPlayer_or_Field();
     const feld1 = data[feld1Id];
-    const feld1_owner = getBesitzer(feld1Id);
+    const feld1_ownerId = getBesitzer(feld1Id);
+    const feld1_owner = gameState.get(feld1_ownerId);
 
     debug("OWNER1: [" + feld1_owner + "]");
     debug("TYP1: [" + feld1?.typ + "]");
@@ -628,7 +629,8 @@ async function Tausch_button() {
 
     const feld2Id = await getPlayer_or_Field();
     const feld2 = data[feld2Id];
-    const feld2_owner = getBesitzer(feld2Id);
+    const feld2_ownerId = getBesitzer(feld2Id);
+    const feld2_owner = gameState.get(feld2_ownerId);
 
     if (feld2_owner === null || feld2.typ !== "Feld") {
         debug("Ungültiges Feld2 oder Feld2 noch nicht im Besitz. " + "Error: " + feld2.name)
@@ -637,10 +639,43 @@ async function Tausch_button() {
         return;
     };
 
+    if (feld1_owner === feld2_owner) {
+        debug("Mann kann nicht mit sich selber tauschen");
+        playSound("error");
+        Tausch_button_ausblenden();
+        return;
+    };
+
     document.getElementById("Tauschen-popup-text2").innerText = feld2.name;
     document.getElementById("Tauschen-popup-titel").innerText = "Bereit zum Tausch";
 
-    document.getElementById
+    document.getElementById("Tauschen-popup-button-confirm").addEventListener("click", () => {
+        Tausch_button_ausblenden();
+
+        const index1 = feld1_owner.grundstuecke.indexOf(feld1Id);
+        const index2 = feld2_owner.grundstuecke.indexOf(feld2Id);
+
+        // Alte ColorIDs entfernen
+        if (index1 !== -1) {
+            feld1_owner.colorIDs.splice(index1, 1);
+        }
+
+        if (index2 !== -1) {
+            feld2_owner.colorIDs.splice(index2, 1);
+        }
+
+        // Grundstücke tauschen
+        feld1_owner.grundstuecke = feld1_owner.grundstuecke.filter(id => id !== feld1Id);
+
+        feld2_owner.grundstuecke = feld2_owner.grundstuecke.filter(id => id !== feld2Id);
+
+        feld1_owner.grundstuecke.push(feld2Id);
+        feld2_owner.grundstuecke.push(feld1Id);
+
+        // Neue ColorIDs hinzufügen
+        feld1_owner.colorIDs.push(feld2.colorID);
+        feld2_owner.colorIDs.push(feld1.colorID);
+    });
 
 
 };
