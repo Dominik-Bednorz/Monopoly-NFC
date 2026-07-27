@@ -507,7 +507,7 @@ async function Auktion_button() {
 
     document.getElementById("Auktion-titel").innerText = field.name;
     document.getElementById("Auktion-text").innerText = "Normalpreis:" + field.preis;
-    document.getElementById("Auktion-popup-button-starten").classList.remove("invisible");
+    document.querySelector("Auktion-popup-button-starten").disabled = false;
 
     document.getElementById("Auktion-popup-button-starten").addEventListener("click", () => {
         AuktionPOPUP_ausblenden();
@@ -524,7 +524,7 @@ async function Auktion_button() {
 
         document.getElementById("Auktion-titel").innerText = "Warte auf Feld...";
         document.getElementById("Auktion-text").innerText = "Scanne ein Feld ein um die Aktion zu starten";
-        document.getElementById("Auktion-popup-button-starten").classList.add("invisible");
+        document.querySelector("Auktion-popup-button-starten").disabled = true;
     };
 
     let preis_bei_Auktion = 0;
@@ -613,31 +613,38 @@ async function Tausch_button() {
     const feld1 = data[feld1Id];
     const feld1_owner = getBesitzer(feld1Id);
 
-    debug("OWNER: [" + feld1_owner + "]");
-debug("TYP: [" + feld1?.typ + "]");
+    debug("OWNER1: [" + feld1_owner + "]");
+    debug("TYP1: [" + feld1?.typ + "]");
+
     if (feld1_owner === null || feld1.typ !== "Feld") {
         debug("Ungültiges Feld1 oder Feld1 noch nicht im Besitz. " + "Error: " + feld1.name)
         playSound("error");
         Tausch_button_ausblenden();
         return;
-    }
+    };
+
     document.getElementById("Tauschen-popup-text1").innerText = feld1.name;
 
 
     const feld2Id = await getPlayer_or_Field();
     const feld2 = data[feld2Id];
     const feld2_owner = getBesitzer(feld2Id);
+
     if (feld2_owner === null || feld2.typ !== "Feld") {
         debug("Ungültiges Feld2 oder Feld2 noch nicht im Besitz. " + "Error: " + feld2.name)
         playSound("error");
         Tausch_button_ausblenden();
         return;
-    }
+    };
 
     document.getElementById("Tauschen-popup-text2").innerText = feld2.name;
+    document.getElementById("Tauschen-popup-titel").innerText = "Bereit zum Tausch";
+
+
 };
 
     function Tausch_button_ausblenden () {
+        document.getElementById("Tauschen-popup-titel").innerText = "Scanne beide Felder nacheinander ein...";
         document.getElementById("Tauschen-popup-text1").innerText = "Warte auf Feld 1...";
         document.getElementById("Tauschen-popup-text2").innerText = "Warte auf Feld 2...";
 
