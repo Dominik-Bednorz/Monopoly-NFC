@@ -186,6 +186,11 @@ function feldINFO (id) {
         gameMode = "waiting_for_next_action";
     };
 
+let freie_Felder = Object.entries(data)
+    .filter(([_k, v]) => v && v.typ === "Feld")
+    .map(([k]) => Number(k));
+    debug("Freie Felder:" + freie_Felder);
+    
 function pay(playerId) {
 
     const player = gameState.get(playerId);
@@ -728,7 +733,9 @@ function playSound(soundName) {
 };
 
 document.addEventListener("click", (event) => {
-    if (event.target.closest("button")) {
+    const button = event.target.closest("button");
+
+    if (button && !button.classList.contains("silent")) {
         playSound("button_ui");
     }
 });
