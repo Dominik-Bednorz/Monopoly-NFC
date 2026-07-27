@@ -388,13 +388,13 @@ function refresh_main_win () {
 function getGesamtVermoegen(id) {
     const spieler = gameState.get(id);
 
-    let vermoegen = spieler.geld;
+    let vermoegen = Number(spieler.geld);
 
     for (const feldId of spieler.grundstuecke) {
         const feld = data[feldId];
 
         if (feld) {
-            vermoegen += feld.preis;
+            vermoegen += Number(feld.preis);
         }
     }
 
