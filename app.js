@@ -712,7 +712,7 @@ const sounds = {
     cash_in: new Audio("./sounds/cash-in.mp3"),
     win: new Audio("./sounds/win.mp3"),
     fliegen: new Audio("./sounds/fliegen.wav"),
-    button_ui: new Audio(".sounds/button_ui.mp3"),
+    button_ui: new Audio("./sounds/button_ui.mp3"),
 };
 
 function playSound(soundName) {
