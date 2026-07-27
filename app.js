@@ -550,7 +550,7 @@ async function Auktion_button() {
 
                 clearInterval(auktionInterval);
 
-                debug("Auktion beendet! für" + preis_bei_Auktion);
+                debug("Auktion beendet! für " + preis_bei_Auktion + " €");
                 Auktion_beendet(fieldId, field, preis_bei_Auktion)
             }
 
@@ -572,8 +572,10 @@ async function Auktion_button() {
         document.getElementById("Auktion-beendet-popup").classList.remove("invisible");
 
         document.getElementById("Auktion-beendet-titel").innerText = field.name + " wird für " + preis_bei_Auktion + " € verkauft";
-
+        
+        debug("VOR GET PLAYER");
         const höchstbidender = await getPlayer_or_Field();
+        debug("NACH GET PLAYERs");
         const player = data[höchstbidender];
 
         player.geld -= preis_bei_Auktion;
