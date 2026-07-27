@@ -565,7 +565,7 @@ async function Auktion_button() {
         document.getElementById("Auktionzähler-timer").innerText = "Noch " + auktionTimer + " Sekunden übrig";
     };
 
-    function Auktion_beendet (fieldId, field, preis_bei_Auktion) {
+    async function Auktion_beendet (fieldId, field, preis_bei_Auktion) {
         Auktion_starten_AUSBLENDEN();
         gameMode = "buttonMode"
 
@@ -576,7 +576,7 @@ async function Auktion_button() {
         const höchstbidender = await getPlayer_or_Field();
         const player = data[höchstbidender];
 
-        player.geld -= Number(field.preis);
+        player.geld -= preis_bei_Auktion;
         player.grundstuecke.push(fieldId);
         player.colorIDs.push(field.colorID);
         
@@ -586,8 +586,11 @@ async function Auktion_button() {
     };
 
     function Auktion_starten_AUSBLENDEN () {
-        document.getElementById("Auktionzähler-popup-button-abbrechen").classList.add("invisible");
+        document.getElementById("Auktionzähler-popup").classList.add("invisible");
         gameMode = "waiting_for_next_action"
+
+        auktionTimer = 5;
+        preis_bei_Auktion = 0;
         clearInterval(auktionInterval);
 
     };
