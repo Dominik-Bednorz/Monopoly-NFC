@@ -533,7 +533,7 @@ async function Auktion_button() {
 
     function Auktion_starten (fieldId, field) {
         
-        gameMode = "NFC_gespert"
+        gameMode = "ButtonMode"
 
         document.getElementById("Auktionzähler-popup").classList.remove("invisible");
         document.getElementById("Auktionzähler-titel").innerText = "Auktion läuft für " + field.name;
