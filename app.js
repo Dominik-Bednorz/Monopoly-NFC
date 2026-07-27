@@ -612,6 +612,9 @@ async function Tausch_button() {
     const feld1Id = await getPlayer_or_Field();
     const feld1 = data[feld1Id];
     const feld1_owner = getBesitzer(feld1Id);
+
+    debug("OWNER: [" + feld1_owner + "]");
+debug("TYP: [" + feld1?.typ + "]");
     if (feld1_owner === null || feld1.typ !== "Feld") {
         debug("Ungültiges Feld1 oder Feld1 noch nicht im Besitz. " + "Error: " + feld1.name)
         playSound("error");
