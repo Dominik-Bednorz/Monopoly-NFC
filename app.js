@@ -648,6 +648,7 @@ async function Tausch_button() {
 
     document.getElementById("Tauschen-popup-text2").innerText = feld2.name;
     document.getElementById("Tauschen-popup-titel").innerText = "Bereit zum Tausch";
+    document.getElementById("Tauschen-popup-button-confirm").disabled = false;
 
     document.getElementById("Tauschen-popup-button-confirm").addEventListener("click", () => {
         Tausch_button_ausblenden();
@@ -684,6 +685,7 @@ async function Tausch_button() {
         document.getElementById("Tauschen-popup-titel").innerText = "Scanne beide Felder nacheinander ein...";
         document.getElementById("Tauschen-popup-text1").innerText = "Warte auf Feld 1...";
         document.getElementById("Tauschen-popup-text2").innerText = "Warte auf Feld 2...";
+        document.getElementById("Tauschen-popup-button-confirm").disabled = true;
 
         document.getElementById("Tauschen-popup").classList.add("invisible");
         gameMode = "waiting_for_next_action";
