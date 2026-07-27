@@ -550,7 +550,7 @@ async function Auktion_button() {
 
                 clearInterval(auktionInterval);
 
-                debug("Auktion beendet!");
+                debug("Auktion beendet! für" + preis_bei_Auktion);
                 Auktion_beendet(fieldId, field, preis_bei_Auktion)
             }
 
