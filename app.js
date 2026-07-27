@@ -719,6 +719,7 @@ function playSound(soundName) {
     const sound = sounds[soundName];
 
     if (sound) {
+        debug("playing:" + soundName);
         sound.currentTime = 0;
         sound.play();
     } else {
@@ -728,7 +729,6 @@ function playSound(soundName) {
 
 document.addEventListener("click", (event) => {
     if (event.target.closest("button")) {
-        debug("lrllsdkfkskhfgklnav")
         playSound("button_ui");
     }
 });
