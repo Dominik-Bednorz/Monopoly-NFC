@@ -583,6 +583,9 @@ async function Auktion_button() {
         playSound("buy");
         debug(player.name + " hat bei einer Auktion " + field.name + " für " + preis_bei_Auktion + " € gekauft");
         refresh_main();
+        
+        gameMode = "waiting_for_next_action";
+        document.getElementById("Auktion-beendet-popup").classList.add("invisible");
     };
 
     function Auktion_starten_AUSBLENDEN () {
