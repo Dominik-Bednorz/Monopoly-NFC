@@ -349,9 +349,17 @@ function refresh_main () {
 
     for(const id of beigetreteneSpieler) {
         bankdiv_text += `${gameState.get(id).name}: ${gameState.get(id).geld}€\n`;
+
+        if (gameState.get(id).geld < 0) {
+            broke(id);
+        };
     };
     
     bankdiv.innerText = bankdiv_text;
+};
+
+async function broke(brokeguy) {
+    
 };
 
 function refresh_main_win () {
@@ -704,6 +712,7 @@ const sounds = {
     cash_in: new Audio("./sounds/cash-in.mp3"),
     win: new Audio("./sounds/win.mp3"),
     fliegen: new Audio("./sounds/fliegen.wav"),
+    button_ui: new Audio(".sounds/button_ui.pm3"),
 };
 
 function playSound(soundName) {
@@ -716,6 +725,12 @@ function playSound(soundName) {
         debug("Sound nicht gefunden:", soundName);
     }
 };
+
+document.addEventListener("click", (event) => {
+    if (event.target.closest("button")) {
+        playSound("button_ui");
+    }
+});
 
 
 function debug(msg) { //statt Console
