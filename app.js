@@ -67,7 +67,7 @@ startgame.addEventListener("click", async () => {
                 break;
 
             case "waiting_for_next_action":
-                if (typ === "Spieler") {
+                if (typ === "Spieler" && !beigetreteneSpieler.has(nfcID)) {
                     playSound("error");
                 }
                 if (typ === "Feld") {
@@ -373,7 +373,17 @@ function refresh_main () {
 };
 
 async function broke(brokeguy) {
-    if (gameState.get(brokeguy).geld < 0) {
+    if (getGesamtVermoegen(brokeguy, true) > Math.abs(gameState.get(brokeguy).geld)) {
+        // Spieler hat genug Grundstücksgeld, um seine Schulden zu begleichen
+        debug(gameState.get(brokeguy).name + " hat genug Grundstücksgeld (" + getGesamtVermoegen(brokeguy, true) + "€), um seine Schulden zu begleichen.");
+    }
+
+    else {
+        // Spieler hat nicht genug Grundstücksgeld, um seine Schulden zu begleichen
+        debug(gameState.get(brokeguy).name + " hat nicht genug Grundstücksgeld (" + getGesamtVermoegen(brokeguy, true) + "€), um seine Schulden zu begleichen.");
+        beigetreteneSpieler.delete(brokeguy);
+        gameState.delete(brokeguy);
+        debug(gameState.get(brokeguy)?.name + " wurde aus dem Spiel entfernt.");
     }
 };
 
@@ -387,10 +397,11 @@ function refresh_main_win () {
     
     bankdiv.innerText = bankdiv_text;
 };
-function getGesamtVermoegen(id) {
+function getGesamtVermoegen(id, felder_only = false) {
     const spieler = gameState.get(id);
 
-    let vermoegen = Number(spieler.geld);
+    let vermoegen = 0;
+    
 
     for (const feldId of spieler.grundstuecke) {
         const feld = data[feldId];
@@ -400,8 +411,14 @@ function getGesamtVermoegen(id) {
         }
     }
 
+    if (felder_only) { // felder_only ist für broke nötig. (hast du genug Grundstücksgeld)
+        return vermoegen;
+    }
+
+    vermoegen += Number(spieler.geld);
+
     return vermoegen;
-}
+};
 
 //Buttons
 
