@@ -365,6 +365,7 @@ function refresh_main () {
 
         if (gameState.get(id).geld < 0) {
             broke(id);
+            debug(gameState.get(id).name + " ist pleite!");
         };
     };
     
@@ -372,7 +373,8 @@ function refresh_main () {
 };
 
 async function broke(brokeguy) {
-    
+    if (gameState.get(brokeguy).geld < 0) {
+    }
 };
 
 function refresh_main_win () {
