@@ -372,10 +372,11 @@ function refresh_main () {
     bankdiv.innerText = bankdiv_text;
 };
 
-async function broke(brokeguy) {
+function broke(brokeguy) {
     if (getGesamtVermoegen(brokeguy, true) > Math.abs(gameState.get(brokeguy).geld)) {
         // Spieler hat genug Grundstücksgeld, um seine Schulden zu begleichen
         debug(gameState.get(brokeguy).name + " hat genug Grundstücksgeld (" + getGesamtVermoegen(brokeguy, true) + "€), um seine Schulden zu begleichen.");
+        
     }
 
     else {

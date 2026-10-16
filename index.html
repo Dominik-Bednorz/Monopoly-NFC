@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monopoly</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_old.css">
 </head>
 <body>
     <div id="startgamescreen">
@@ -89,6 +89,13 @@
             <p id="Tauschen-popup-text2">Warte auf Feld 2...</p>
             <button id="Tauschen-popup-button-confirm" disabled>Tauschen</button>
             <button id="Tauschen-popup-button-abbrechen" onclick="Tausch_button_ausblenden();">Abbrechen</button>
+        </div>
+
+        <div id="broke-popup" class="invisible">
+            <h2 id="broke-popup-titel">Du bist pleite!</h2>
+            <p id="broke-popup-text">Verkaufe deine Grundstücke indem du sie einscannst.</p>
+            <button id="broke-popup-button" onclick="brokePOPUP_aufgeben()">Aufgeben</button>
+
         </div>
 
         <div id="player-buttons" class="invisible">
