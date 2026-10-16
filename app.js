@@ -201,12 +201,12 @@ function pay(playerId) {
 
     if (!player || !field) return;
 
+    // 🟢 FREI → kaufen
     if (player.geld >= Number(field.preis)) {
         debug(player.name + " hat genug Geld für " + field.name);
         return;
     }
 
-    // 🟢 FREI → kaufen
     if (ownerId === null) {
         const otherFieldsSameColor = Object.entries(data)
             .filter(([key, value]) => value.colorID === field.colorID && Number(key) !== aktuelle_id)
