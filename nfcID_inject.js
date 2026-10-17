@@ -5,6 +5,16 @@ document.getElementById("playbutton_NFC_inject").addEventListener("click", funct
     document.getElementById("main").classList.remove("invisible");
 
     document.getElementById("nfc_submit").addEventListener("click", function() {
+        handle_NFC_inject_input();
+    });
+
+    document.getElementById("nfc_id_input").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            handle_NFC_inject_input();
+        }
+    });
+
+    function handle_NFC_inject_input() {
         const nfcID = document.getElementById("nfc_id_input").value;
 
         debug(nfcID + " (von PC debug)");
@@ -90,5 +100,7 @@ document.getElementById("playbutton_NFC_inject").addEventListener("click", funct
                 debug("NFC ist gespert");
                 break;
         };
-    });
+
+        document.getElementById("nfc_id_input").value = "";
+    };
 });
