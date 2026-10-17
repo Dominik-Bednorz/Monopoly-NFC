@@ -10,6 +10,12 @@
     <div id="startgamescreen">
         <button id="playbutton">Spiel starten</button>
         <button id="playbutton_console">Spiel starten mit Console</button>
+        <button id="playbutton_NFC_inject">Spiel starten mit NFC Inject</button>
+    </div>
+
+    <div id="NFC_inject" class="invisible">
+        <input type="text" id="nfc_id_input" placeholder="Gib hier deine NFC-ID ein...">
+        <button id="nfc_submit">Bestätigen</button>
     </div>
 
     <div id="main">
@@ -114,5 +120,6 @@
     </div>
 
     <script src="app.js"></script>
+    <script src="nfcID_inject.js"></script>
 </body>
 </html>
