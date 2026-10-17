@@ -204,8 +204,8 @@ function pay(playerId) {
     if (!player || !field) return;
 
     // 🟢 FREI → kaufen
-    if (player.geld >= Number(field.preis)) {
-        debug(player.name + " hat genug Geld für " + field.name);
+    if (!player.geld >= Number(field.preis)) {
+        debug(player.name + " hat nicht genug Geld für " + field.name);
         return;
     }
 
@@ -388,7 +388,7 @@ async function broke(brokeguyID, force_Aufgeben = false) {
 
     if (getGesamtVermoegen(brokeguyID, true) > Math.abs(gameState.get(brokeguyID).geld) || force_Aufgeben) {
         // Spieler hat genug Grundstücksgeld, um seine Schulden zu begleichen
-        debug(gameState.get(brokeguyID).name + " hat genug Grundstücksgeld (" + getGesamtVermoegen(brokeguyID, true) + "€), um seine Schulden zu begleichen.");
+        debug(gameState.get(brokeguyID).name + " hat genug Grundstücksgeld (" + getGesamtVermoegen(brokeguyID, true) + "€), um seine Schulden zu begleichen. (" + Math.abs(gameState.get(brokeguyID).geld) + "€)");
         
         document.getElementById("broke-popup-counter").innerText = schon_gezahlt + "€ von " + Math.abs(gameState.get(brokeguyID).geld) + "€ bezahlt";
         document.getElementById("broke-popup").classList.remove("invisible");
@@ -727,7 +727,7 @@ async function Tausch_button() {
     document.getElementById("Tauschen-popup-titel").innerText = "Bereit zum Tausch";
     document.getElementById("Tauschen-popup-button-confirm").disabled = false;
 
-    document.getElementById("Tauschen-popup-button-confirm").addEventListener("click", () => {
+    document.getElementById("Tauschen-popup-button-confirm").onclick = () => {
         Tausch_button_ausblenden();
 
         const index1 = feld1_owner.grundstuecke.indexOf(feld1Id);
@@ -753,7 +753,7 @@ async function Tausch_button() {
         // Neue ColorIDs hinzufügen
         feld1_owner.colorIDs.push(feld2.colorID);
         feld2_owner.colorIDs.push(feld1.colorID);
-    });
+    };
 
 
 };
