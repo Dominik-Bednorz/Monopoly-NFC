@@ -19,7 +19,9 @@ document.getElementById("playbutton_console").addEventListener("click", () => {
 
 let gameMode = "waiting_for_players"
 
-const ndef = new NDEFReader(); //Element das NFC ließt
+if ("NDEFReader" in window) {
+    const ndef = new NDEFReader();
+} //Element das NFC ließt, nur wenn der Browser NFC unterstützt
 let nfcID = ""; //Varibale für das Auslesen der Tags
 
 document.getElementById("main").classList.add("invisible");//nur der Button ist sichtbar
@@ -805,4 +807,5 @@ document.addEventListener("click", (event) => {
 
 function debug(msg) { //statt Console
     document.getElementById("debug").innerText += msg + "\n";
+    console.log(msg);
 };
