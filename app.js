@@ -135,6 +135,7 @@ startgame.addEventListener("click", async () => {
 
 const beigetreteneSpieler = new Set();
 const lobbyFertig = document.createElement("button");
+lobbyFertig.id = "lobbyFertig_button";
 
 function invite_Players(id) {
 
@@ -390,6 +391,7 @@ async function broke(brokeguyID, force_Aufgeben = false) {
         // Spieler hat genug Grundstücksgeld, um seine Schulden zu begleichen
         debug(gameState.get(brokeguyID).name + " hat genug Grundstücksgeld (" + getGesamtVermoegen(brokeguyID, true) + "€), um seine Schulden zu begleichen. (" + Math.abs(gameState.get(brokeguyID).geld) + "€)");
         
+        document.getElementById("broke-popup-titel").innerText = gameState.get(brokeguyID).name + " ist pleite!";
         document.getElementById("broke-popup-counter").innerText = schon_gezahlt + "€ von " + Math.abs(gameState.get(brokeguyID).geld) + "€ bezahlt";
         document.getElementById("broke-popup").classList.remove("invisible");
 
@@ -412,15 +414,16 @@ async function broke(brokeguyID, force_Aufgeben = false) {
     else {
         // Spieler hat nicht genug Grundstücksgeld, um seine Schulden zu begleichen
         debug(gameState.get(brokeguyID).name + " hat nicht genug Grundstücksgeld (" + getGesamtVermoegen(brokeguyID, true) + "€), um seine Schulden zu begleichen oder hat augegeben.");
+        debug(gameState.get(brokeguyID)?.name + " wurde aus dem Spiel entfernt.");
         beigetreteneSpieler.delete(brokeguyID);
         gameState.delete(brokeguyID);
-        debug(gameState.get(brokeguyID)?.name + " wurde aus dem Spiel entfernt.");
     }
+
+    gameMode = "waiting_for_next_action";
+    refresh_main();
 };
 
-function brokePOPUP_Aufgeben_Button () {
-    broke(brokeguyID_global, true);
-};
+
 
 function refresh_main_win () {
     playSound("win");

@@ -14,8 +14,13 @@ document.getElementById("playbutton_NFC_inject").addEventListener("click", funct
         }
     });
 
-    function handle_NFC_inject_input() {
-        const nfcID = document.getElementById("nfc_id_input").value;
+});
+
+function handle_NFC_inject_input(predefinedNFCID) {
+        let nfcID = document.getElementById("nfc_id_input").value;
+        if (nfcID === "") {
+            nfcID = predefinedNFCID; // Replace with actual predefined NFC ID if available
+        }
 
         debug(nfcID + " (von PC debug)");
         debug("typ:" + data[nfcID]?.typ)
@@ -103,4 +108,24 @@ document.getElementById("playbutton_NFC_inject").addEventListener("click", funct
 
         document.getElementById("nfc_id_input").value = "";
     };
-});
+
+function destroyMoney(money) {
+    if (money === undefined) {
+        money = document.getElementById("nfc_id_input").value;
+        document.getElementById("nfc_id_input").value = "";
+    }
+
+    for (let playerID of beigetreteneSpieler) {
+        gameState.get(playerID).geld = money;
+        debug(gameState.get(playerID).name + " hat jetzt " + gameState.get(playerID).geld + "€");
+    }
+    refresh_main();
+};
+
+function quick_100() {
+    handle_NFC_inject_input(1);
+    handle_NFC_inject_input(2);
+    document.getElementById("lobbyFertig_button").click();
+    destroyMoney(100);
+    document.getElementById("quick_100").hidden = true;
+}

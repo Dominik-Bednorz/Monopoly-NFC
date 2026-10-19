@@ -17,6 +17,9 @@
     <div id="NFC_inject" class="invisible">
         <input type="text" id="nfc_id_input" placeholder="Gib hier deine NFC-ID ein...">
         <button id="nfc_submit">Bestätigen</button>
+        <button id="money_destroy" onclick="destroyMoney()">Destroy Money</button>
+        <button id="quick_100" onclick="quick_100()">Quick 100</button>
+
     </div>
     <br>
     <div id="main">
@@ -102,15 +105,14 @@
             <h2 id="broke-popup-titel">Du bist pleite!</h2>
             <p id="broke-popup-text">Verkaufe deine Grundstücke indem du sie einscannst.</p>
             <p id="broke-popup-counter"></p>
-            <button id="broke-popup-button" onclick="brokePOPUP_Aufgeben_Button()">Aufgeben</button>
+            <button id="broke-popup-button" onclick="broke(brokeguyID_global, true);">Aufgeben</button>
 
         </div>
 
-        <div id="player-info">
-            <h2 id="broke-popup-titel">Du bist pleite!</h2>
-            <p id="broke-popup-text">Verkaufe deine Grundstücke indem du sie einscannst.</p>
-            <p id="broke-popup-counter"></p>
-            <button id="broke-popup-button" onclick="brokePOPUP_Aufgeben_Button()">Aufgeben</button>
+        <div id="lose" class="invisible">
+            <h2 id="lose-popup-titel">Du bist pleite!</h2>
+            <p id="lose-popup-text">Du hast das Spiel mit dem X Platz abgeschlossen.</p>
+            <button id="lose-popup-button" onclick="brokePOPUP_Aufgeben_Button()">OK</button>
 
         </div>
 
@@ -129,6 +131,6 @@
     </div>
 
     <script src="app.js"></script>
-    <script src="nfcID_inject.js"></script>
+    <script src="dev.js"></script>
 </body>
 </html>
