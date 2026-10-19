@@ -52,12 +52,6 @@ startgame.addEventListener("click", async () => {
 
         const typ = data[nfcID]?.typ;
 
-        if (idTransmitter && brokeguyID_global !== null) {
-            idTransmitter(nfcID);
-            idTransmitter = null;
-            return;
-        }
-
         if (typ === "Spieler") {
             playSound(data[nfcID]?.name)
         };
@@ -399,50 +393,34 @@ async function broke(brokeguyID, force_Aufgeben = false) {
         document.getElementById("broke-popup-counter").innerText = schon_gezahlt + "€ von " + Math.abs(gameState.get(brokeguyID).geld) + "€ bezahlt";
         document.getElementById("broke-popup").classList.remove("invisible");
 
-        const schulden = Math.abs(gameState.get(brokeguyID).geld);
-        while (schon_gezahlt < schulden) {
+        while (schon_gezahlt < Math.abs(gameState.get(brokeguyID).geld)) {
             const feldId = await getPlayer_or_Field();
             const feld = data[feldId];
             const brokeguy = gameState.get(brokeguyID);
-            if (!feld || feld.typ !== "Feld" || !brokeguy.grundstuecke.includes(feldId)) {
-                debug("Bitte ein eigenes Grundstück scannen.");
-                playSound("error");
-                continue;
-            }
-
             const index = gameState.get(brokeguyID).grundstuecke.indexOf(feldId);
 
             if (index !== -1) {
-                brokeguy.colorIDs.splice(index, 1);
+                gameState.get(brokeguyID).colorIDs.splice(index, 1);
             }
-            brokeguy.grundstuecke = brokeguy.grundstuecke.filter(id => id !== feldId);
+            gameState.get(brokeguyID).grundstuecke = gameState.get(brokeguyID).grundstuecke.filter(id => id !== feldId);
 
-            schon_gezahlt += Number(feld.preis);
-            document.getElementById("broke-popup-counter").innerText = schon_gezahlt + "€ von " + schulden + "€ bezahlt";
+            document.getElementById("broke-popup-counter").innerText = schon_gezahlt + "€ von " + Math.abs(gameState.get(brokeguyID).geld) + "€ bezahlt";
         };
 
     }
 
     else {
         // Spieler hat nicht genug Grundstücksgeld, um seine Schulden zu begleichen
-        debug(gameState.get(brokeguyID).name + " hat nicht genug Grundstücksgeld (" + getGesamtVermoegen(brokeguyID, true) + "€), um seine Schulden zu begleichen oder hat aufgegeben.");
-        debug(gameState.get(brokeguyID)?.name + " wurde aus dem Spiel entfernt.");
-        gameState.delete(brokeguyID);
+        debug(gameState.get(brokeguyID).name + " hat nicht genug Grundstücksgeld (" + getGesamtVermoegen(brokeguyID, true) + "€), um seine Schulden zu begleichen oder hat augegeben.");
         beigetreteneSpieler.delete(brokeguyID);
+        gameState.delete(brokeguyID);
+        debug(gameState.get(brokeguyID)?.name + " wurde aus dem Spiel entfernt.");
     }
-
-    brokePOPUP_ausblenden();
-    brokeguyID_global = null;
-    refresh_main();
 };
 
 function brokePOPUP_Aufgeben_Button () {
     broke(brokeguyID_global, true);
 };
-     function brokePOPUP_ausblenden() {
-        document.getElementById("broke-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
-    };
 
 function refresh_main_win () {
     playSound("win");
