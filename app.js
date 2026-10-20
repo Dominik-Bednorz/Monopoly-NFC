@@ -160,6 +160,7 @@ const bankdiv = document.createElement("div");
 let bankdiv_text = "";
 
 lobbyFertig.addEventListener("click", () => {
+    debug("Spiel gestartet mit " + beigetreteneSpieler.size + " Spielern");
     lobbyFertig.classList.add("invisible");
     document.getElementById("lobby").classList.add("invisible");
     gameMode = "waiting_for_next_action";

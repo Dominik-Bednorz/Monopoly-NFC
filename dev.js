@@ -19,7 +19,7 @@ document.getElementById("playbutton_NFC_inject").addEventListener("click", funct
 function handle_NFC_inject_input(predefinedNFCID) {
         let nfcID = document.getElementById("nfc_id_input").value;
         if (nfcID === "") {
-            nfcID = predefinedNFCID; // Replace with actual predefined NFC ID if available
+            nfcID = Number(predefinedNFCID); // Replace with actual predefined NFC ID if available
         }
 
         debug(nfcID + " (von PC debug)");
@@ -127,5 +127,5 @@ function quick_100() {
     handle_NFC_inject_input(2);
     document.getElementById("lobbyFertig_button").click();
     destroyMoney(100);
-    document.getElementById("quick_100").hidden = true;
+    document.getElementById("quick_100").classList.add("invisible");
 }
