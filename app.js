@@ -3,6 +3,7 @@ let freie_Felder = 0;
 async function init() {
     const response = await fetch("Datenbank.json");
     data = await response.json();
+    debug("Datenbank geladen");
 
     freie_Felder = Object.entries(data)
         .filter(([_k, v]) => v && v.typ === "Feld")

@@ -19,7 +19,8 @@ document.getElementById("playbutton_NFC_inject").addEventListener("click", funct
 function handle_NFC_inject_input(predefinedNFCID) {
         let nfcID = document.getElementById("nfc_id_input").value;
         if (nfcID === "") {
-            nfcID = Number(predefinedNFCID); // Replace with actual predefined NFC ID if available
+            debug("NFC ID ist leer, verwende predefinedNFCID: " + predefinedNFCID);
+            nfcID = String(predefinedNFCID); // Replace with actual predefined NFC ID if available
         }
 
         debug(nfcID + " (von PC debug)");
@@ -111,7 +112,7 @@ function handle_NFC_inject_input(predefinedNFCID) {
 
 function destroyMoney(money) {
     if (money === undefined) {
-        money = document.getElementById("nfc_id_input").value;
+        money = Number(document.getElementById("nfc_id_input").value);
         document.getElementById("nfc_id_input").value = "";
     }
 
