@@ -22,7 +22,9 @@ let gameMode = "waiting_for_players"
 
 if ("NDEFReader" in window) {
     const ndef = new NDEFReader();
-} //Element das NFC ließt, nur wenn der Browser NFC unterstützt
+    debug("NFC wird unterstützt");
+}
+else("NFC wird nicht untersützt") //Element das NFC ließt, nur wenn der Browser NFC unterstützt
 let nfcID = ""; //Varibale für das Auslesen der Tags
 
 document.getElementById("main").classList.add("invisible");//nur der Button ist sichtbar
