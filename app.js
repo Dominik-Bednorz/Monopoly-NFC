@@ -19,9 +19,16 @@ document.getElementById("playbutton_console").addEventListener("click", () => {
 });
 
 let gameMode = "waiting_for_players";
-const ndef = NDEFReader(); //NFC Reader initialisieren
+let ndef; //NFC Reader initialisieren
 
-//Element das NFC ließt, nur wenn der Browser NFC unterstützt, ansonsten dev tools
+if ("NDEFReader" in window) {
+    ndef = new NDEFReader();
+    debug("NFC wird unterstützt - NEDFR Reader initialisiert");
+}
+else {
+    debug("NFC wird nicht untersützt - dev tools werden eingelesen");
+    document.body.appendChild(document.createElement("script")).src = "dev.js";
+} //Element das NFC ließt, nur wenn der Browser NFC unterstützt, ansonsten dev tools
 
 let nfcID = ""; //Varibale für das Auslesen der Tags
 
