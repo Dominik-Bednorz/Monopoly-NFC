@@ -18,11 +18,12 @@ document.getElementById("playbutton_console").addEventListener("click", () => {
     document.getElementById("debug").classList.remove("invisible");
 });
 
-let gameMode = "waiting_for_players"
+let gameMode = "waiting_for_players";
+const ndef = null;
 
 if ("NDEFReader" in window) {
-    const ndef = new NDEFReader();
-    debug("NFC wird unterstützt");
+    ndef = new NDEFReader();
+    debug("NFC wird unterstützt - NEDFR Reader initialisiert");
 }
 else {
     debug("NFC wird nicht untersützt - dev tools werden eingelesen");
