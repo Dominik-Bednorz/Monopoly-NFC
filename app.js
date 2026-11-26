@@ -24,7 +24,11 @@ if ("NDEFReader" in window) {
     const ndef = new NDEFReader();
     debug("NFC wird unterstützt");
 }
-else("NFC wird nicht untersützt") //Element das NFC ließt, nur wenn der Browser NFC unterstützt
+else {
+    debug("NFC wird nicht untersützt - dev tools werden eingelesen");
+    document.body.appendChild(document.createElement("script")).src = "dev.js";
+} //Element das NFC ließt, nur wenn der Browser NFC unterstützt, ansonsten dev tools
+
 let nfcID = ""; //Varibale für das Auslesen der Tags
 
 document.getElementById("main").classList.add("invisible");//nur der Button ist sichtbar
@@ -85,8 +89,8 @@ startgame.addEventListener("click", async () => {
                 }
                 if (typ === "Spezialkarte_Auto") {
                     if (beigetreteneSpieler.has(4)) {
-                    document.getElementById("main").appendChild(Spezialkarten_AutoPOPUP);
-                    Spezialkarten_AutoPOPUP.innerHTML = `
+                        document.getElementById("main").appendChild(Spezialkarten_AutoPOPUP);
+                        Spezialkarten_AutoPOPUP.innerHTML = `
                         <h2>Hast du 6 gewürfelt?</h2>
                         <button onclick="Spezialkarten_AutoPOPUP.remove(); Spezialkarten_AutoPOPUP_handler(); gameMode = 'waiting_for_next_action';">Bestätigen</button>
                         <button onclick="Spezialkarten_AutoPOPUP.remove();">Abbrechen</button>`;
@@ -168,7 +172,7 @@ lobbyFertig.addEventListener("click", () => {
     document.getElementById("lobby").classList.add("invisible");
     gameMode = "waiting_for_next_action";
 
-    for(const id of beigetreteneSpieler) {
+    for (const id of beigetreteneSpieler) {
         gameState.set(id, {
             name: data[id].name,
             geld: 1500,
@@ -184,7 +188,7 @@ lobbyFertig.addEventListener("click", () => {
 
 let aktuelle_id;
 
-function feldINFO (id) {
+function feldINFO(id) {
     document.getElementById("feldINFO-popup").classList.remove("invisible");
 
     document.getElementById("feldINFO-popup-title").innerText = data[id]?.name;
@@ -193,13 +197,13 @@ function feldINFO (id) {
     gameMode = "waiting_for_payment";
 
 };
-    function feldINFO_ausblenden () {
-        document.getElementById("feldINFO-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
-    };
+function feldINFO_ausblenden() {
+    document.getElementById("feldINFO-popup").classList.add("invisible");
+    gameMode = "waiting_for_next_action";
+};
 
 debug("Freie Felder: " + freie_Felder);
-    
+
 function pay(playerId) {
 
     const player = gameState.get(playerId);
@@ -229,7 +233,7 @@ function pay(playerId) {
         player.grundstuecke.push(aktuelle_id);
         player.colorIDs.push(field.colorID);
         freie_Felder -= 1;
-        
+
         playSound("buy");
         debug(player.name + " hat gekauft: " + field.name);
         refresh_main();
@@ -247,7 +251,7 @@ function pay(playerId) {
         else if (field === 19 || field === 20) {
             mietpreis = Number(field.preis_mit_nur_einer_Farbe);
         }
-        else  {
+        else {
             mietpreis = Number(field.preis) / 2;
         };
 
@@ -277,7 +281,7 @@ function getBesitzer(feldId) {
     return null;
 };
 
-function EreigniskarteINFO (id) {
+function EreigniskarteINFO(id) {
     document.getElementById("EreigniskarteINFO-popup").classList.remove("invisible");
 
     document.getElementById("EreigniskarteINFO-popup-title").innerText = data[id]?.titel;
@@ -286,13 +290,13 @@ function EreigniskarteINFO (id) {
     gameMode = "waiting_for_Ereignis_interaction"
 };
 
-    function EreigniskarteINFO_ausblenden () {
-        document.getElementById("EreigniskarteINFO-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
+function EreigniskarteINFO_ausblenden() {
+    document.getElementById("EreigniskarteINFO-popup").classList.add("invisible");
+    gameMode = "waiting_for_next_action";
 };
 
 const QuestionPOPUP_welcher_player = document.createElement("div");
-function Ereignis_ausführen (id) {
+function Ereignis_ausführen(id) {
     const player = gameState.get(id);
     const ereignis = data[aktuelle_id];
     const alleSpieler_außer_der_der_dran_ist = Array.from(beigetreteneSpieler).filter(id => gameState.get(id).name !== player.name);
@@ -313,7 +317,7 @@ function Ereignis_ausführen (id) {
             break;
 
         case "SpielfeldONLY":
-            
+
             break;
 
         case "Erweiterte Logik":
@@ -329,7 +333,7 @@ function Ereignis_ausführen (id) {
 
             if (aktuelle_id === 29) {
                 const Anzahl_grundstuecke_von_player = player.grundstuecke.length;
-                
+
                 player.geld -= Anzahl_grundstuecke_von_player * 30;
                 refresh_main();
             }
@@ -341,7 +345,7 @@ function Ereignis_ausführen (id) {
                     player.geld += 10;
                     refresh_main();
                 }
-            
+
             }
 
             if (aktuelle_id === 37) {
@@ -364,7 +368,7 @@ function handlePlayerSelection_Ereigniskarte(selectedPlayerId) {
     QuestionPOPUP_welcher_player.remove();
 };
 
-function refresh_main () {
+function refresh_main() {
     if (freie_Felder === 0) {
         refresh_main_win();
         return;
@@ -372,7 +376,7 @@ function refresh_main () {
 
     bankdiv_text = "";
 
-    for(const id of beigetreteneSpieler) {
+    for (const id of beigetreteneSpieler) {
         bankdiv_text += `${gameState.get(id).name}: ${gameState.get(id).geld}€\n`;
 
         if (gameState.get(id).geld < 0) {
@@ -380,7 +384,7 @@ function refresh_main () {
             debug(gameState.get(id).name + " ist pleite!");
         };
     };
-    
+
     bankdiv.innerText = bankdiv_text;
 };
 
@@ -394,7 +398,7 @@ async function broke(brokeguyID, force_Aufgeben = false) {
     if (getGesamtVermoegen(brokeguyID, true) > Math.abs(gameState.get(brokeguyID).geld) || force_Aufgeben) {
         // Spieler hat genug Grundstücksgeld, um seine Schulden zu begleichen
         debug(gameState.get(brokeguyID).name + " hat genug Grundstücksgeld (" + getGesamtVermoegen(brokeguyID, true) + "€), um seine Schulden zu begleichen. (" + Math.abs(gameState.get(brokeguyID).geld) + "€)");
-        
+
         document.getElementById("broke-popup-titel").innerText = gameState.get(brokeguyID).name + " ist pleite!";
         document.getElementById("broke-popup-counter").innerText = schon_gezahlt + "€ von " + Math.abs(gameState.get(brokeguyID).geld) + "€ bezahlt";
         document.getElementById("broke-popup").classList.remove("invisible");
@@ -429,21 +433,21 @@ async function broke(brokeguyID, force_Aufgeben = false) {
 
 
 
-function refresh_main_win () {
+function refresh_main_win() {
     playSound("win");
     bankdiv_text = "";
 
-    for(const id of beigetreteneSpieler) {
+    for (const id of beigetreteneSpieler) {
         bankdiv_text += `${gameState.get(id).name}: ${getGesamtVermoegen(id)}€\n`;
     };
-    
+
     bankdiv.innerText = bankdiv_text;
 };
 function getGesamtVermoegen(id, felder_only = false) {
     const spieler = gameState.get(id);
 
     let vermoegen = 0;
-    
+
 
     for (const feldId of spieler.grundstuecke) {
         const feld = data[feldId];
@@ -495,10 +499,10 @@ async function LOS_button() {
     LOSPOPUP_ausblenden();
     refresh_main();
 };
-    function LOSPOPUP_ausblenden() {
-        document.getElementById("LOS-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
-    };
+function LOSPOPUP_ausblenden() {
+    document.getElementById("LOS-popup").classList.add("invisible");
+    gameMode = "waiting_for_next_action";
+};
 
 async function Gefängnis_button() {
     if (gameMode === "buttonMode") {
@@ -525,10 +529,10 @@ async function Gefängnis_button() {
     GefängnisPOPUP_ausblenden();
     refresh_main();
 };
-    function GefängnisPOPUP_ausblenden() {
-        document.getElementById("Gefängnis-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
-    };
+function GefängnisPOPUP_ausblenden() {
+    document.getElementById("Gefängnis-popup").classList.add("invisible");
+    gameMode = "waiting_for_next_action";
+};
 
 async function Fliegen_button() {
     if (gameMode === "buttonMode") {
@@ -553,8 +557,8 @@ async function Fliegen_button() {
         debug(player.name + " Fliegt gratis.");
     }
     else {
-    player.geld -= 100;
-    debug(player.name + " bezahlt 100€ für Gefängnis.");
+        player.geld -= 100;
+        debug(player.name + " bezahlt 100€ für Gefängnis.");
     };
 
     playSound("fliegen");
@@ -562,10 +566,10 @@ async function Fliegen_button() {
     FliegenPOPUP_ausblenden();
     refresh_main();
 };
-    function FliegenPOPUP_ausblenden() {
-        document.getElementById("Fliegen-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
-    };
+function FliegenPOPUP_ausblenden() {
+    document.getElementById("Fliegen-popup").classList.add("invisible");
+    gameMode = "waiting_for_next_action";
+};
 
 async function Auktion_button() {
     if (gameMode === "buttonMode") {
@@ -595,94 +599,94 @@ async function Auktion_button() {
     document.getElementById("Auktion-popup-button-starten").addEventListener("click", () => {
         AuktionPOPUP_ausblenden();
         Auktion_starten(fieldId, field); //muss unten sein wegen gameMode NFC Sperre
-        
+
     },
-    { once: true }
+        { once: true }
     );
 
 };
-    function AuktionPOPUP_ausblenden() {
-        document.getElementById("Auktion-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
+function AuktionPOPUP_ausblenden() {
+    document.getElementById("Auktion-popup").classList.add("invisible");
+    gameMode = "waiting_for_next_action";
 
-        document.getElementById("Auktion-titel").innerText = "Warte auf Feld...";
-        document.getElementById("Auktion-text").innerText = "Scanne ein Feld ein um die Aktion zu starten";
-        document.getElementById("Auktion-popup-button-starten").disabled = true;
-    };
+    document.getElementById("Auktion-titel").innerText = "Warte auf Feld...";
+    document.getElementById("Auktion-text").innerText = "Scanne ein Feld ein um die Aktion zu starten";
+    document.getElementById("Auktion-popup-button-starten").disabled = true;
+};
 
-    let preis_bei_Auktion = 0;
-    let auktionInterval;
-    let auktionTimer = 5;
+let preis_bei_Auktion = 0;
+let auktionInterval;
+let auktionTimer = 5;
 
-    function Auktion_starten (fieldId, field) {
-        
-        gameMode = "buttonMode"
+function Auktion_starten(fieldId, field) {
 
-        document.getElementById("Auktionzähler-popup").classList.remove("invisible");
-        document.getElementById("Auktionzähler-titel").innerText = "Auktion läuft für " + field.name;
-        document.getElementById("Auktionzähler-URSPRUNGpreis").innerText = "Urspunglicher Preis: " + field.preis;
-        document.getElementById("Auktionzähler-preis").innerText = "Akutelleer Preis: " + preis_bei_Auktion + "€";
-        document.getElementById("Auktionzähler-timer").innerText= "Noch " + auktionTimer + " Sekunden übrig"
+    gameMode = "buttonMode"
 
-        auktionInterval = setInterval(() => {
-            auktionTimer -= 1;
+    document.getElementById("Auktionzähler-popup").classList.remove("invisible");
+    document.getElementById("Auktionzähler-titel").innerText = "Auktion läuft für " + field.name;
+    document.getElementById("Auktionzähler-URSPRUNGpreis").innerText = "Urspunglicher Preis: " + field.preis;
+    document.getElementById("Auktionzähler-preis").innerText = "Akutelleer Preis: " + preis_bei_Auktion + "€";
+    document.getElementById("Auktionzähler-timer").innerText = "Noch " + auktionTimer + " Sekunden übrig"
 
-            document.getElementById("Auktionzähler-timer").innerText = "Noch " + auktionTimer + " Sekunden übrig";
+    auktionInterval = setInterval(() => {
+        auktionTimer -= 1;
 
-            if (auktionTimer <= 0) {
-
-                clearInterval(auktionInterval);
-
-                debug("Auktion beendet! für " + preis_bei_Auktion + " €");
-                Auktion_beendet(fieldId, field, preis_bei_Auktion)
-            }
-
-        }, 1000);
-
-    };
-
-    function höher_bieten (zahl) {
-        auktionTimer = 5;
-        preis_bei_Auktion += zahl;
-        document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
         document.getElementById("Auktionzähler-timer").innerText = "Noch " + auktionTimer + " Sekunden übrig";
-    };
 
-    async function Auktion_beendet (fieldId, field, preis_bei_Auktion) {
-        Auktion_starten_AUSBLENDEN();
-        gameMode = "buttonMode"
+        if (auktionTimer <= 0) {
 
-        document.getElementById("Auktion-beendet-popup").classList.remove("invisible");
+            clearInterval(auktionInterval);
 
-        document.getElementById("Auktion-beendet-titel").innerText = field.name + " wird für " + preis_bei_Auktion + " € verkauft";
-        
-        debug("VOR GET PLAYER");
-        const höchstbidenderId = await getPlayer_or_Field();
-        debug("playergotten:" + höchstbidenderId);
-        const player = gameState.get(höchstbidenderId);
+            debug("Auktion beendet! für " + preis_bei_Auktion + " €");
+            Auktion_beendet(fieldId, field, preis_bei_Auktion)
+        }
 
-        player.geld -= preis_bei_Auktion;
-        player.grundstuecke.push(fieldId);
-        player.colorIDs.push(field.colorID);
-        freie_Felder -= 1;
-        
-        playSound("buy");
-        debug(player.name + " hat bei einer Auktion " + field.name + " für " + preis_bei_Auktion + " € gekauft");
-        refresh_main();
-        
-        gameMode = "waiting_for_next_action";
-        document.getElementById("Auktion-beendet-popup").classList.add("invisible");
-    };
+    }, 1000);
 
-    function Auktion_starten_AUSBLENDEN () {
-        document.getElementById("Auktionzähler-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action"
+};
 
-        auktionTimer = 5;
-        preis_bei_Auktion = 0;
-        clearInterval(auktionInterval);
+function höher_bieten(zahl) {
+    auktionTimer = 5;
+    preis_bei_Auktion += zahl;
+    document.getElementById("Auktionzähler-preis").innerText = preis_bei_Auktion + "€";
+    document.getElementById("Auktionzähler-timer").innerText = "Noch " + auktionTimer + " Sekunden übrig";
+};
 
-    };
+async function Auktion_beendet(fieldId, field, preis_bei_Auktion) {
+    Auktion_starten_AUSBLENDEN();
+    gameMode = "buttonMode"
+
+    document.getElementById("Auktion-beendet-popup").classList.remove("invisible");
+
+    document.getElementById("Auktion-beendet-titel").innerText = field.name + " wird für " + preis_bei_Auktion + " € verkauft";
+
+    debug("VOR GET PLAYER");
+    const höchstbidenderId = await getPlayer_or_Field();
+    debug("playergotten:" + höchstbidenderId);
+    const player = gameState.get(höchstbidenderId);
+
+    player.geld -= preis_bei_Auktion;
+    player.grundstuecke.push(fieldId);
+    player.colorIDs.push(field.colorID);
+    freie_Felder -= 1;
+
+    playSound("buy");
+    debug(player.name + " hat bei einer Auktion " + field.name + " für " + preis_bei_Auktion + " € gekauft");
+    refresh_main();
+
+    gameMode = "waiting_for_next_action";
+    document.getElementById("Auktion-beendet-popup").classList.add("invisible");
+};
+
+function Auktion_starten_AUSBLENDEN() {
+    document.getElementById("Auktionzähler-popup").classList.add("invisible");
+    gameMode = "waiting_for_next_action"
+
+    auktionTimer = 5;
+    preis_bei_Auktion = 0;
+    clearInterval(auktionInterval);
+
+};
 
 async function Tausch_button() {
     if (gameMode === "buttonMode") {
@@ -765,15 +769,15 @@ async function Tausch_button() {
 
 };
 
-    function Tausch_button_ausblenden () {
-        document.getElementById("Tauschen-popup-titel").innerText = "Scanne beide Felder nacheinander ein...";
-        document.getElementById("Tauschen-popup-text1").innerText = "Warte auf Feld 1...";
-        document.getElementById("Tauschen-popup-text2").innerText = "Warte auf Feld 2...";
-        document.getElementById("Tauschen-popup-button-confirm").disabled = true;
+function Tausch_button_ausblenden() {
+    document.getElementById("Tauschen-popup-titel").innerText = "Scanne beide Felder nacheinander ein...";
+    document.getElementById("Tauschen-popup-text1").innerText = "Warte auf Feld 1...";
+    document.getElementById("Tauschen-popup-text2").innerText = "Warte auf Feld 2...";
+    document.getElementById("Tauschen-popup-button-confirm").disabled = true;
 
-        document.getElementById("Tauschen-popup").classList.add("invisible");
-        gameMode = "waiting_for_next_action";
-    };
+    document.getElementById("Tauschen-popup").classList.add("invisible");
+    gameMode = "waiting_for_next_action";
+};
 
 //Sounds
 const sounds = {
